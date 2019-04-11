@@ -1,0 +1,568 @@
+<h2 id="build">build</h2>
+
+<h3><a name="build"></a>build</h3>
+
+<p>Begin a build task on the local system. This will run the build steps of the manifest on the local machine in the current directory.</p>
+
+<h4>SYNTAX</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>distelli build -app &lt;domain&gt;/&lt;app-name&gt; -branch &lt;branch-name&gt; -clone &lt;git|hg&gt;:&lt;clone uri&gt; -dind|-nodind -manifest &lt;yaml-file&gt; -rev &lt;commit-id&gt; -message &lt;msg&gt; -profile-dir &lt;dir&gt; -rev &lt;commit-id&gt; -taskid &lt;taskDomain&gt;:&lt;taskNum&gt; -vm &lt;vagrant|docker&gt;:&lt;id&gt;
+</code></pre></div></div>
+
+<h4>OPTIONS</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-app &lt;domain&gt;/&lt;app-name&gt;
+</code></pre></div></div>
+
+<p>Validate that the manifest(s) match this application name. May be specified multiple times (or separate app names with a comma).</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-branch &lt;branch-name&gt;
+</code></pre></div></div>
+
+<p>Specify a specific branch for the repository to be cloned.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-clone &lt;git|hg&gt;:&lt;clone uri&gt;
+</code></pre></div></div>
+
+<p>Clone the repository before performing the build. If this repository is connected to your Puppet Pipelines account, the credentials for this account are downloaded.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-dind|-nodind
+</code></pre></div></div>
+
+<p>By default, Docker-In-Docker is run in a separate container for builds. Add <code class="highlighter-rouge">-nodind</code> to disable this behavior</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-manifest &lt;yaml-file&gt;
+</code></pre></div></div>
+
+<p>Specify an alternative manifest (defaults to ./distelli-manifest.yml if it exists). This may be a comma-separated list of manifests, or you can supply this argument multiple times.</p>
+
+<blockquote>
+  <p><strong>Note:</strong> If the manifest is not in the root directory of your repository, then the <code class="highlighter-rouge">distelli push</code> command will be run with a working directory of the manifest.</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-message &lt;msg&gt;
+</code></pre></div></div>
+
+<p>A message that will be associated with the build artifact created from this build.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-profile-dir &lt;dir&gt;
+</code></pre></div></div>
+
+<p>Location of profile information (like cached credentials), defaults to <b>~</b>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-rev &lt;commit-id&gt;
+</code></pre></div></div>
+
+<p>Specify a specific commit (or revision) of the repository to checkout.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-taskid &lt;taskDomain&gt;:&lt;taskNum&gt;
+</code></pre></div></div>
+
+<p>Register the build artifacts with the specified task (which must be in-progress).</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-vm &lt;vagrant|docker&gt;:&lt;id&gt;
+</code></pre></div></div>
+
+<p>After cloning, launch the build commands within the specified virtual machine. If ‘vagrant’ is specified, this is the name of the Vagrant “box”, otherwise it is the name of the Docker image.</p>
+
+<h4>USAGE</h4>
+
+<p>By default, with no options, this command will look in the local ./distelli-manifest.yml file at the <a href="../for-apps/manifest-build.html">Build sections</a> and run those steps. Then the artifacts will be <a href="./cli-command.html">bundled and pushed</a>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>distelli build
+</code></pre></div></div>
+
+<h4>EXAMPLES</h4>
+
+<p>Doing a simple build</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>distelli build
+</code></pre></div></div>
+
+<h2 id="bundle">bundle</h2>
+
+<p>Locally bundle a release of an application.</p>
+
+<h4>SYNTAX</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>distelli bundle [-full] [-manifest &lt;manifest-filename&gt;] [-output-file &lt;filename&gt;] [-profile-dir &lt;dir&gt;] [-quiet]
+</code></pre></div></div>
+
+<h4>OPTIONS</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-full
+</code></pre></div></div>
+
+<p>Dislplay even more information (like the manifest data uploaded with the release).</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-manifest &lt;manifest-filename&gt;
+</code></pre></div></div>
+
+<p>The manifest file to use. Defaults to <b>distelli-manifest.yml</b>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-output-file &lt;output-filename&gt;
+</code></pre></div></div>
+
+<p>Location to put the bundle.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-quiet
+</code></pre></div></div>
+
+<p>Disable the progress bar.</p>
+
+<h4>USAGE</h4>
+
+<p>By default, with no options, this command will look in the local ./distelli-manifest.yml file at the PkgInclude and PkgExclude section to determine which files, if any, will be bundled. If these sections are omitted, nothing will be bundled.</p>
+
+<p>These files will be tar’d and gzip’d and saved locally to ./.distelli/pkgbuild with the following naming convention:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>APPNAME-YYYY-MM-DD-HH-MM-SS-MD5SUM.tar.gz
+</code></pre></div></div>
+
+<ul>
+<li>APPNAME - The Pipelines application name</li>
+
+<li>YYYY - The full year</li>
+
+<li>MM - The month</li>
+
+<li>DD - The date</li>
+
+<li>HH - The hour</li>
+
+<li>MM - The minute</li>
+
+<li>SS - The second</li>
+
+<li>MD5SUM - The MD5 checksum of the files contents</li>
+
+<li>tar - The files are tar'd</li>
+
+<li>gz - The file is compressed using gzip</li>
+</ul>
+
+<h4>EXAMPLES</h4>
+
+<p>Doing a simple bundle</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ distelli bundle
+
+Packaging App: SimpleApp
+Packaged 2 files in 2 directories
+
+Packaged: ./.distelli/pkgbuild/SimpleApp-2015-07-02-00-21-57-d01fdbcbfca218764a037ecfdab75620.tar.gz
+</code></pre></div></div>
+
+<p>Bundling to a different filename while using a different manifest.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ distelli bundle -o Simpleapp.tar.gz -f linux-manifest.yml
+
+Packaging App: SimpleApp
+Packaged 2 files in 2 directories
+
+Packaged: Simpleapp.tar.gz
+</code></pre></div></div>
+
+<h4>Bundle storage</h4>
+
+<p>By default the release bundle is stored in your Pipelines account in the cloud. If you prefer to store your release bundle in your AWS S3 bucket, you can do so.</p>
+
+<h2 id="create">create</h2>
+
+<p>Create a new application in a Pipelines account.</p>
+
+<h4>SYNTAX</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>distelli create &lt;username&gt;/&lt;appname&gt;
+</code></pre></div></div>
+
+<h4>OPTIONS</h4>
+
+<p>None.</p>
+
+<h4>USAGE</h4>
+
+<p>Creating an application with <code class="highlighter-rouge">distelli create</code> will create an empty application in a Pipelines account.</p>
+
+<h4>EXAMPLES</h4>
+
+<p>Creating an application called “SimpleApp” in account “jdoe”.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ distelli create jdoe/SimpleApp
+Creating App: jdoe/SimpleApp
+App jdoe/SimpleApp created successfully
+</code></pre></div></div>
+
+<h2 id="deploy">deploy</h2>
+
+<p>Deploy an application release to an environment.
+You can either push and deploy a local release or deploy an existing release.</p>
+
+<h4>SYNTAX</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>distelli deploy -e|--env &lt;environment&gt; [-d|--stagger-delay &lt;stagger-delay&gt;] [-f|--manifest &lt;manifest-filename&gt;] [-m|--description &lt;description&gt;] [-q|--quiet] [-r|--release &lt;release-version&gt;] [-s|--&lt;stagger-size&gt;] [-y|--yes]
+</code></pre></div></div>
+
+<h4>OPTIONS</h4>
+
+<blockquote>
+  <p><strong>Important:</strong> The <code class="highlighter-rouge">-h | --hosts</code> option has been deprecated. If you need to deploy to a single server, create an environment with just that one server in the environment.</p>
+</blockquote>
+
+<blockquote>
+  <p><strong>Note:</strong> The <code class="highlighter-rouge">-e | --env</code> option is required.</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-e|--env &lt;environment&gt;
+</code></pre></div></div>
+
+<p>The name of the application environment you want to deploy to. This option must be specified when using the <code class="highlighter-rouge">distelli deploy</code> command.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-d|--stagger-delay &lt;stagger-delay&gt;
+</code></pre></div></div>
+
+<p>This option specifies the stagger delay for the deploy. The stagger delay is the time in seconds to wait between stagger sets when deploying to multiple servers in an environment. If this option is omitted, the stagger delay defaults to 60 seconds.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-f|--manifest &lt;manifest-filename&gt;
+</code></pre></div></div>
+
+<p>With this option the deploy will use an alternate manifest. If this option is omitted the deploy uses the local ./distelli-manifest.yml.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-m|--description &lt;description&gt;
+</code></pre></div></div>
+
+<p>Provide a description for this deploy.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-q|--quiet
+</code></pre></div></div>
+
+<p>This option indicates that the CLI should not monitor the deployment and exit immediately after starting the deployment.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-r|--release &lt;release-version&gt;
+</code></pre></div></div>
+
+<p>This option will instruct the deploy to use a specific existing application release. For more information on release ID’s see <a href="../for-apps/release.html">Finding a Release ID</a>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-s|--stagger-size &lt;stagger-size&gt;
+</code></pre></div></div>
+
+<p>This option specifies the stagger size for the deploy. The stagger size is the number of servers to deploy to at a time, when deploying to multiple servers in an environment. If this option is omitted, the stagger size defaults to 10 servers.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-y|--yes
+</code></pre></div></div>
+
+<p>This option indicates that the CLI should not ask for confirmation, and should start the deployment immediately.</p>
+
+<h4>USAGE</h4>
+
+<p>With no options besides the required <code class="highlighter-rouge">-e</code> <environment> the deploy command will look for a local ./distelli-manifest.yml and based on the information in the manifest, [bundle](#bundle) a release and [push](#push) it. The deploy will then coordinate with the Pipelines SaaS to deploy this release to the specified <environment>.</environment></environment></p>
+
+<h4>EXAMPLES</h4>
+
+<p>Deploy the current local application, in the current directory, to the environment “SA_Linux.”</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ distelli deploy -e SA_Linux
+
+Starting deployment of jdoe/SimpleApp
+to 1 Environment(s):
+
+jdoe/SA_Linux: 2 server(s)
+
+Release: New Release
+Stagger Size: 10
+Stagger Delay: 60
+
+Ready to start Deployment
+
+Are you sure? (Yes/NO): Yes
+Starting Deployments...
+Packaged 2 files in 2 directories
+Pushing App: SimpleApp
+Uploading Bundle: [==========] 100%
+
+Creating Release... DONE
+Deploying jdoe/SimpleApp to env: jdoe/SA_Linux
+
+https://myaccount.distelli.com/deployment/29948
+Deployment 29948 InProgress: [=         ] Servers: 0 Done, 0 In Progress, 0
+Deployment 29948 InProgress: [ =        ] Servers: 0 Done, 0 In Progress, 0
+Deployment 29948 Done: [=         ] Servers: 1 Done, 0 In Progress, 0 Failed
+
+Deployment 29948 completed Successfully
+See https://myaccount.distelli.com/deployment/29948
+</code></pre></div></div>
+
+<p>Deploy application release version “v50” to environment “SA_Linux” and skip the CLI confirmation, answering “Yes”.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ distelli deploy -r v50 -e SA_Linux -y
+
+Starting deployment of jdoe/SimpleApp
+to 1 Environment(s):
+
+jdoe/SA_Linux: 1 server(s)
+
+Release: v50
+Stagger Size: 10
+Stagger Delay: 60
+
+Starting Deployments...
+
+https://myaccount.distelli.com/deployment/29952
+Deployment 29952 InProgress: [=         ] Servers: 0 Done, 0 In Progress, 0
+Deployment 29952 InProgress: [ =        ] Servers: 0 Done, 0 In Progress, 0
+Deployment 29952 Done: [=         ] Servers: 1 Done, 0 In Progress, 0 Failed
+
+Deployment 29952 completed Successfully
+See https://myaccount.distelli.com/deployment/29952
+</code></pre></div></div>
+
+<p>Deploy the current local application, in the current directory, to the environment “SA_Linux” and suppress CLI monitoring.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ distelli deploy -e SA_Linux -q -y
+
+Starting deployment of jdoe/SimpleApp
+to 1 Environment(s):
+
+jdoe/SA_Linux: 1 server(s)
+
+Release: New Release
+Stagger Size: 10
+Stagger Delay: 60
+
+Starting Deployments...
+Packaged 1 files in 1 directories
+Pushing App: SimpleApp
+Uploading Bundle: [==========] 100%
+
+Creating Release... DONE
+Deploying jdoe/SimpleApp to env: jdoe/SA_Linux
+
+Deployment 29985: Started
+See https://myaccount.distelli.com/deployment/29985
+</code></pre></div></div>
+
+<h3 id="deploy-path">Deploy PATH</h3>
+
+<p>When doing deploys, the Pipelines agent uses the following command to retrieve its PATH.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>getconf PATH
+</code></pre></div></div>
+
+<p>Which will result in a PATH of:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/bin:/usr/bin
+</code></pre></div></div>
+
+<h2>Extending Agent Deploy PATH</h2>
+
+<p>You can update the PATH during deploys by using the Env: section of the <a href="../for-apps/manifest.html">Pipelines manifest</a>. The Env: section of the manifest allows you to provide environment variables used during every phase of the deploy. Here is an example:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Env:
+  - 'PATH="$PATH:/example/other/dir:/foo/bar"'
+</code></pre></div></div>
+
+<p>If you are using the in-application manifest instead of a distelli-manifest.yml, the Env: manifest section is not available.</p>
+
+<blockquote>
+  <p><strong>Note:</strong> Using an in-repository distelli-manifest.yml is strongly recommended.</p>
+</blockquote>
+
+<p>In this scenario you would have to update the PATH in every manifest step the PATH is needed.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export PATH="$PATH:/example/other/dir:/foo/bar"
+</code></pre></div></div>
+
+<p><img src="images/ref-agent-deploy-path.png" alt="in app manifest agent deploy path" /></p>
+
+<h2 id="help">help</h2>
+
+<p>Shows the CLI help.</p>
+
+<h4>SYNTAX</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>distelli help [&lt;command&gt;]
+</code></pre></div></div>
+
+<h4>OPTIONS</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;command&gt;
+</code></pre></div></div>
+
+<p>Any Pipelines <b>command</b> you wish to receive more help for.</p>
+
+<h4>USAGE</h4>
+
+<p>Simply issuing a <code class="highlighter-rouge">distelli help</code> will provide a list of commands. Doing a <code class="highlighter-rouge">distelli help &lt;command&gt;</code> will provide more help on that specific command.</p>
+
+<h4>EXAMPLES</h4>
+
+<p>Get help.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ distelli help
+Usage: distelli &lt;command&gt;
+
+Distelli ToolKit
+
+  bundle
+    Locally create a new release of an application
+
+  create &lt;username&gt;/&lt;app-name&gt;
+    Create a new application
+
+  version
+    Display the version of distelli in use
+
+  login
+    Login to your distelli account
+
+  agent
+    Connect your server to Distelli
+
+  push
+    Push a new release of an application
+
+  deploy
+    Deploy a release to an environment
+
+  build
+    Run a build
+
+</code></pre></div></div>
+
+<p>Get help with the <code class="highlighter-rouge">login</code> command.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ distelli help login
+Usage: distelli login -profile-dir &lt;dir&gt;
+
+Login to your distelli account
+
+  -profile-dir &lt;dir&gt;
+    Location of profile information (like cached credentials), defaults to
+    /home/jdoe
+</code></pre></div></div>
+
+<h2 id="login">login</h2>
+
+<p>Login (sign in) to your Puppet Pipelines account.</p>
+
+<h4>SYNTAX</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>distelli login  [-conf FILE]
+</code></pre></div></div>
+
+<h4>OPTIONS</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-conf FILE
+</code></pre></div></div>
+
+<p>This option tells the agent to read a distelli.yml for the agent access token and secret key. See the <a href="./distelliyml.html">Pipelines distelli.yml Usage</a> for more information.</p>
+
+<h4>USAGE</h4>
+
+<p>Use the <code class="highlighter-rouge">distelli login</code> command to connect the Pipelines CLI to your Puppet Pipelines account. You will be prompted for your email and password.</p>
+
+<h4>EXAMPLES</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ distelli login
+
+Email: jdoe@example.com
+Password:
+</code></pre></div></div>
+
+<h2 id="push">push</h2>
+
+<p>Bundle a release of your application and push it to a Puppet Pipelines account.</p>
+
+<blockquote>
+  <p><strong>Important:</strong> If you have configured an S3 bucket in Pipelines, a bundle of the application release will be pushed to your S3 bucket.</p>
+</blockquote>
+
+<h4>SYNTAX</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>distelli push  [-description &lt;message&gt;] [-release-notes] [-manifest &lt;manifest-filename&gt;] [-save-release &lt;filename&gt;] [-quiet]
+</code></pre></div></div>
+
+<h4>OPTIONS</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-description &lt;description&gt;
+</code></pre></div></div>
+
+<p>Provides a message for this release.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-release-notes
+</code></pre></div></div>
+
+<p>This option will prompt the user for a multi-line input of text that will be used as the “release notes” in the web UI. For more information see <a href="../for-apps/release.html">Viewing Release Notes</a>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-manifest &lt;manifest-filename&gt;
+</code></pre></div></div>
+
+<p>This option will use the specified manifest file when bundling and pushing the release. If this option is not supplied, the CLI uses distelli-manifest.yml in the current directory.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-save-release &lt;filename&gt;
+</code></pre></div></div>
+
+<p>Save the release identifier to this filename.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-quiet
+</code></pre></div></div>
+
+<p>Disable the progress bar</p>
+
+<h4>USAGE</h4>
+
+<p>Use the <code class="highlighter-rouge">distelli push</code> command to bundle and upload your release for potential future deployments. During a push, the distelli-manifest.yml <a href="../for-apps/manifest-build.html">PreRelease</a> section is executed.</p>
+
+<h4>EXAMPLES</h4>
+
+<p>Push the current local directory application up to your Puppet Pipelines account which has an S3 bucket configured. Also include a message “First Release”.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ distelli push -m "First Release"
+    Packaged 1 files in 1 directories
+    Pushing App: SimpleApp
+    Uploading Bundle to S3: [==========] 100%
+    Creating Release... DONE
+</code></pre></div></div>
+
+<p>Push the local directory application up to your Puppet Pipelines account with a release note.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>distelli push -r
+Enter Release Notes (Ctrl-D to Finish):
+
+This release fixes issues found in the following bugs:
+* Bug #4373
+* Bug #4201
+* Bug #3293
+
+    Packaged 1 files in 1 directories
+    Pushing App: SimpleApp
+    Uploading Bundle: [=========] 100%
+
+    Creating Release... DONE
+    Uploading Release Notes... DONE
+</code></pre></div></div>
+
+<h2 id="version">version</h2>
+
+<p>Display what version of the unified CLI agent you have installed.</p>
+
+<h4>SYNTAX</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>distelli version
+</code></pre></div></div>
+
+<h4>OPTIONS</h4>
+
+<p>There are no options.</p>
+
+<h4>USAGE</h4>
+
+<p>Use the <code class="highlighter-rouge">distelli version</code> command display the verison of the CLI you have installed.</p>
+
+<h4>EXAMPLES</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ distelli version
+Distelli ToolKit 3.59 (+9 72e46b4f200e)
+Copyright (C) 2015 Distelli Inc.
+</code></pre></div></div>
+

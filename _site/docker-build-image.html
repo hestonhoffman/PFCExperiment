@@ -1,0 +1,174 @@
+<p>With Pipelines for Applications builds you can build on one of the many existing Pipelines shared build images. These images include:</p>
+
+<ul>
+  <li>Pipelines Android</li>
+  <li>Pipelines Base</li>
+  <li>Pipelines Go</li>
+  <li>Pipelines Haskell</li>
+  <li>Pipelines Java/JVM</li>
+  <li>Pipelines Javascript</li>
+  <li>Pipelines Legacy</li>
+  <li>Pipelines PHP</li>
+  <li>Pipelines Perl</li>
+  <li>Pipelines Python</li>
+  <li>Pipelines Ruby</li>
+</ul>
+
+<p>For more information on these build images, see <a href="./build-environment.html">Pipelines Build Environments</a>.</p>
+
+<p>You can further enhance this list with your own custom-built Docker images. To add a custom-built image to the shared image list, you create a Docker Dockerfile and build it with Pipelines for Applications. Simply navigate to the completed Docker image details page in the Pipelines web UI and mark that image as a build image.</p>
+
+<h2 id="image-requirements">Image requirements</h2>
+
+<ul>
+  <li>The Docker image should be based on a flavor of Linux.</li>
+  <li>The Docker image should have the following tools installed:</li>
+  <ul>
+    <li><b>/bin/sh</b> - Specifically, this must work: <code>docker run /bin/sh</code></li>
+    <li><b>bash on PATH</b> - If not, Pipelines will attempt to install it.</li>
+    <li><b>curl on PATH</b> - If not, Pipelines will attempt to install it.</li>
+    <li><b>gosu on PATH</b> - If not, Pipelines will attempt to install it.</li>
+    <li><b>useradd on PATH</b> - If not, Pipelines will attempt to install it.</li>
+    <li><b>distelli on PATH</b> - If not, Pipelines will attempt to install it.</li>
+    <li><b>sudo on PATH</b> - If not, Pipelines will attempt to install it.</li>
+  </ul>
+</ul>
+
+<h2 id="example-dockerfile">Example Dockerfile</h2>
+
+<p>The following Dockerfile exemplifies creating a Docker image for building nodejs applications in Docker. Please note the comments inline.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Ubuntu has the necessary framework to start from
+FROM ubuntu:14.04
+
+# Run as root
+USER root
+
+# Create Distelli user
+RUN useradd -ms /bin/bash distelli 
+
+# Set /home/distelli as the working directory
+WORKDIR /home/distelli
+    
+# Install prerequisites. This provides me with the essential tools for building with.
+# Note. You don't need git or mercurial.
+RUN sudo apt-get update -y \
+    &amp;&amp; sudo apt-get -y install build-essential checkinstall git mercurial \
+    &amp;&amp; sudo apt-get -y install libssl-dev openssh-client openssh-server \
+    &amp;&amp; sudo apt-get -y install curl apt-transport-https ca-certificates
+
+# Update the .ssh/known_hosts file:
+RUN sudo sh -c "ssh-keyscan -H github.com bitbucket.org &gt;&gt; /etc/ssh/ssh_known_hosts"
+
+# Install Distelli CLI to coordinate the build in the container
+RUN curl -sSL https://www.distelli.com/download/client | sh 
+
+# Install Docker
+# Note. This is only necessary if you plan on building Docker images
+RUN sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D \
+    &amp;&amp; sudo sh -c "echo 'deb https://apt.dockerproject.org/repo ubuntu-trusty main' &gt; /etc/apt/sources.list.d/docker.list" \
+    &amp;&amp; sudo apt-get update -y \
+    &amp;&amp; sudo apt-get purge -y lxc-docker \
+    &amp;&amp; sudo apt-get -y install docker-engine \
+    &amp;&amp; sudo sh -c 'curl -L https://github.com/docker/compose/releases/download/1.6.2/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose' \
+    &amp;&amp; sudo chmod +x /usr/local/bin/docker-compose \
+    &amp;&amp; sudo docker -v
+
+# Setup a volume for writing Docker layers/images
+VOLUME /var/lib/docker
+
+# Install gosu
+ENV GOSU_VERSION 1.9
+RUN sudo curl -o /bin/gosu -sSL "https://github.com/tianon/gosu/releases/download/1.9/gosu-$(dpkg --print-architecture)" \
+     &amp;&amp; sudo chmod +x /bin/gosu
+
+# Install node version manager as distelli user
+USER distelli
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash 
+
+# Ensure the final USER statement is "USER root"
+USER root
+
+# An informative file I like to put on my shared images
+RUN sudo sh -c "echo 'Distelli Build Image maintained by Brian McGehee bmcgehee@distelli.com' &gt;&gt; /distelli_build_image.info"
+
+# The following entry point is not necessary
+CMD ["/bin/bash"]
+</code></pre></div></div>
+
+<h2 id="create-application">Create application</h2>
+
+<p>You will need to create an application for creating your custom build image. This application will be created in a software repository and added to Pipelines as an application.</p>
+
+<ol>
+  <li>Create a new repository with the above Dockerfile in it.</li>
+  <li>Add the following distelli-manifest.yml to this repository.</li>
+</ol>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DISTELLI_USERNAME/APP_NAME:
+
+  Build:
+    - echo "--Creating Docker Image--"
+    - docker login -u "$DISTELLI_DOCKER_USERNAME" -p "$DISTELLI_DOCKER_PW" $DISTELLI_DOCKER_ENDPOINT
+    - docker build --quiet=false -t "$DISTELLI_DOCKER_REPO" "$DISTELLI_DOCKER_PATH"
+    - docker tag "$DISTELLI_DOCKER_REPO" "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM" 
+    - echo "--Pushing Docker Image--"
+    - docker push "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
+</code></pre></div></div>
+
+<ol>
+  <li>Replace the following fields:</li>
+</ol>
+
+<ul>
+  <li><b>DISTELLI_USERNAME</b> - Your Pipelines username.</li>
+  <li><b>APP_NAME</b> - The name of the repository or app name in Pipeines for Applications.</li>
+</ul>
+
+<p><img src="images/sbi-my-repo.png" alt="my example repo" /></p>
+
+<p>You can fork my repository at <a href="https://github.com/doct15/docker-build-example">https://github.com/doct15/docker-build-example</a>.</p>
+
+<ol>
+  <li>
+    <p>Add this repository to a new Pipelines application. For more info on creating applications, see <a href="../for-apps/application-create.html">Creating and Building an Application</a>.</p>
+
+    <p>While creating your new application, ensure you configure a Docker registry to store your build image. For more info see <a href="../for-apps/docker.html">Enabling Docker for New Applications</a> or see <a href="../for-apps/docker.html">Enabling Docker for Existing Applications</a>.</p>
+  </li>
+</ol>
+
+<p><img src="images/sbi-my-app.png" alt="my example app" /></p>
+
+<p>The above image shows my example application. Each of my successful builds creates a Docker image that is placed in the Docker repository.</p>
+
+<h2><a name="set-build-image"></a>Set Build Image</h2>
+
+<p>After a successful build of the Docker container, there will be an <b>Image</b> event in Pipelines. Clicking on this will take you to the image details page.</p>
+
+<p><img src="images/sbi-click-image.png" alt="Click the image" /></p>
+
+<p>In the image details page, click the <b>Build Image</b> switch at the top right.</p>
+
+<p><img src="images/sbi-build-image.png" alt="Build image" /></p>
+
+<p>You are now ready to use your new custom build image to build Pipelines applications.</p>
+
+<h2 id="using-custom-docker-images-to-build-in-pipelines">Using custom Docker images to build in Pipelines</h2>
+
+<p>Any Pipelines application that wishes to build with this new custom Docker build image can do so. This option is branch-specific.</p>
+
+<ol>
+  <li>Navigate to the <strong>application</strong> in the Pipelines web UI.</li>
+  <li>Select the <strong>branch</strong> you wish to build with the custom Docker image.</li>
+</ol>
+
+<p><img src="images/sbi-select-branch.png" alt="Select branch" /></p>
+
+<ol>
+  <li>Click the <strong>Build Options</strong> gear.</li>
+</ol>
+
+<p><img src="images/sbi-build-options.png" alt="Build options" /></p>
+
+<p>You can now select to build in your custom container.</p>
+

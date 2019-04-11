@@ -1,0 +1,89 @@
+<p>Using Kubernetes with Pipelines for Containers requires some integrations depending on what features are required.</p>
+
+<p>Integrations in Pipelines for use with Pipelines for Containers include:</p>
+
+<ul>
+  <li><b>Source Control</b> - Where Distelli pulls your software to build your custom containers from a Dockerfile.</li>
+  <li><b>Docker Registry</b> - Where Distelli pushes your Docker image after building it. Also, Distelli can deploy containers to kubernetes directly from a docker registry.</li>
+  <li><b>Cluster Compute</b> - Currently Distelli can create kubernetes clusters in Google Cloud and Amazon Web Services.</li>
+  <ul>
+    <li>Distelli can connect to and manage existing clusters in existing clouds, including: </li>
+    <ul>
+      <li>GKE</li>
+      <li>AWS</li>
+      <li>Azure</li>
+      <li>Bare Metal</li>
+      <li>Other</li>
+    </ul>
+  </ul>
+  <li><b>Notification Channels</b> - Where Distelli sends notifications.</li>
+</ul>
+
+<p><img src="images/k8s-integrations.png" alt="K8S Integrations" /></p>
+
+<h2 id="integrate-a-repository">Integrate a repository</h2>
+
+<p>The master settings for integrating with a repository can be found in your account settings. To change these settings:</p>
+
+<ol>
+  <li>Click on the gear icon in the top right of the Pipelines web UI.</li>
+  <li>Click <b>Integrations</b> link on the left.</li>
+  <li>
+    <p>Click the repository you wish to integrate with.</p>
+
+    <blockquote>
+      <p><strong>Note:</strong> If you are already connected to a repository, the button will say \Disconnect REPO Account. To disconnect (terminate) the integration, click the button. If you disconnect a repository that has repositories connected to applications in Pipelines for Applications, the applications will no longer auto build when a repository check-in occurs.</p>
+    </blockquote>
+  </li>
+  <li>Click the “Connect REPO Account” button for the repository you wish to integrate with. You may be prompted to login to the repository and to approve access to the repository. If you have integrated Pipelines previously, you may not be prompted at all.</li>
+</ol>
+
+<p>Once you have approved the integration on the repository, they are integrated.</p>
+
+<h2 id="remove-pipelines-integration-from-github">Remove Pipelines integration from GitHub</h2>
+
+<p>To completely remove Pipelines integration with GitHub:</p>
+
+<ol>
+  <li>Click on the gear icon in the top right of the Pipelines web UI.</li>
+  <li>Click <b>Integrations</b> link on the left.</li>
+  <li>Select the repository you wish to remove, and click <strong>Disconnect REPO Account</strong>.</li>
+  <li>Log in to your GitHub account and go to the <strong>Settings</strong> page.</li>
+  <li>On the GitHub settings page click the <b>Applications</b> link. Under Authorized applications, find Distelli Inc. and click the <b>Revoke</b> button.&lt;/li&gt;</li>
+</ol>
+
+<h3 id="remove-github-repository-webhooks-or-services">Remove GitHub repository webhooks or services</h3>
+
+<p>To remove a webhook from a specific repository in GitHub:</p>
+<ol>
+<li>Log in to your GitHub account.</li>
+<li>Navigate to the repository that has webhooks you wish to remove.</li>
+<li>Click <b>Settings</b> icon.</li>
+<li>Click the <b>Webhooks &amp; Services</b> link.</li>
+<li>Remove the hook or service you wish.</li>
+</ol>
+
+<h2 id="remove-pipelines-integration-from-bitbucketh3">Remove Pipelines Integration from Bitbucket&lt;/h3&gt;</h2>
+
+<p>To completely remove Pipelines integration with Bitbucket:</p>
+
+<ol>
+  <li>Click on the gear icon in the top right of the Pipelines web UI.</li>
+  <li>Click <b>Integrations</b> link on the left.</li>
+  <li>Select the repository you wish to remove, and click <strong>Disconnect REPO Account</strong>.</li>
+  <li>Log in to your Bitbucket account and go to the Bitbucket <b>Manage account</b> page.</li>
+  <li>On the <strong>Manage</strong> page click the <b>OAuth</b> link.&lt;/li&gt;</li>
+  <li>Under OAuth integrated applications, find Distelli Inc and click the <b>Revoke</b> link.</li>
+</ol>
+
+<h3 id="remove-bitbucket-repository-webhooks-or-servicesh3">Remove Bitbucket Repository Webhooks or Services&lt;/h3&gt;</h3>
+
+<p>To remove a webhook from a specific repository in Bitbucket:</p>
+<ol>
+<li>Login to your Bitbucket account.</li>
+<li>Navigate to the repository that has webhooks you wish to remove.</li>
+<li>Click <b>Settings</b> icon.</li>
+<li>Click the <b>Webhooks</b> or <b>Services</b> link.</li>
+<li>Remove the hook or service you wish.</li>
+</ol>
+

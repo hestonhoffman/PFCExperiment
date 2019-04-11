@@ -1,0 +1,134 @@
+<p>When building software with Pipelines, you can opt to build on Pipelines shared hardware or on your private hardware. This includes building images (containers) for Kubernetes deployments.</p>
+
+<h2 id="build-shared-hardware">Build Shared Hardware</h2>
+
+<p>When building on Pipelines shared hardware, you must select a docker image to build in.</p>
+
+<p><img src="images/k8s-build-shared-hardware.png" alt="Build Images" /></p>
+
+<p>Note, you can build an image with Pipelines and make it available in that list of images. For more info see <a href="./docker-build-image.html">Creating Docker Build Image</a>.</p>
+
+<h2 id="use-your-own-build-server">Use your own build server</h2>
+
+<p>When building your application with Pipelines you can specify Pipelines to use your own build servers wherever they may exist. Once you have followed those steps and installed the Pipelines agent, your server will be available in the <b>Build Hardware</b> section of Pipelines for Containers.</p>
+
+<h3><a name="step-1.-install-the-distelli-agent"></a>Step 1. Install the Pipelines Agent</h3>
+
+<p>To correctly function as a build server in Pipelines you must first install the Pipelines agent on the build server.</p>
+
+<p>Instructions for installing the Pipelines agent can be found here <a href="./agent.html">Installing the Agent</a>.</p>
+
+<blockquote>
+  <p><strong>Caution:</strong> For build server functionality, the server must be running Pipelines agent version 3.50 or greater. To see your Pipelines agent version see <a href="./agent-command.html">the <code class="highlighter-rouge">agent version</code> command</a>.</p>
+</blockquote>
+
+<h3><a name="step-2.-install-repository-client"></a>Step 2. Install Repository Client</h3>
+
+<p>For your build server to be able to retrieve software code from a repository, the appropriate client software must be installed.</p>
+
+<blockquote>
+  <p><strong>Note:</strong> Ensure you install the command line version. With Windows ensure you install the windows command prompt version.</p>
+</blockquote>
+
+<p>Use <a href="https://git-scm.com/downloads"><strong>git</strong></a> for BitBucket, GitHub, and GitHub Enterprise.</p>
+
+<p>For more information on installing Git for Windows, please see <a href="../for-apps/build-configure.html">Installing Git for Windows Build</a>.</p>
+
+<p>Use <a href="https://www.mercurial-scm.org/downloads">mercurial</a> for BitBucket.</p>
+
+<h3><a name="step-3.-mark-server-as-build-server"></a>Step 3. Mark Server as Build Server</h3>
+
+<p>From the Pipelines web UI you mark the server as a build server.</p>
+
+<blockquote>
+  <p><strong>Note:</strong> A server marked as a build server can still consume deployments from Pipelines.</p>
+</blockquote>
+
+<ol>
+<li>In the Pipelines web UI click the <b>Servers</b> link from the top.</li>
+<li>In the server list find the server you wish to make a build server and click the server name.</li>
+<li>On the server page click the <b>Build Server</b> link in the top right.</li>
+<li>In the resulting dialog box, click the <b>Enable</b> button.</li>
+</ol>
+
+<p>You have enabled this server to build your applications. For more information see <a href="../for-apps/build-configure.html">Setting Build Server Capabilities</a>.</p>
+
+<h3><a name="step-4.-enable-application-to-use-build-server"></a>Step 4(VM). Enable Application to use Build Server</h3>
+
+<blockquote>
+  <p><strong>Note:</strong> This section is specific to using the build server with the Pipelines VM Dashboard. Please skip to the next section for using the build server with Pipelines for Containers.</p>
+</blockquote>
+
+<p>For an application to use a build server it must be integrated with a repository. To integrate your application with a repository see:</p>
+
+<ul>
+  <li><a href="../for-apps/application-manage.html">Connecting a Repository to an Application</a>.</li>
+  <li><a href="../for-apps/application-create.html">Creating an Application from a Repository</a>.</li>
+</ul>
+
+<blockquote>
+  <p><strong>Note:</strong> If your application is not integrated with a repository, this option will not be available.</p>
+</blockquote>
+
+<p>To enable an application to use a build server:</p>
+
+<ol>
+  <li><a href="../for-apps/application-manage.html">Navigate to the Application</a></li>
+  <li>Ensure you are on the <strong>Overview</strong> tab.</li>
+  <li>
+    <p>On the right click the <strong>Build Options gear</strong>.</p>
+
+    <p>A dialog box will appear on the right.</p>
+  </li>
+  <li>Click the <strong>Build on my own hardware</strong> option at the top right.</li>
+  <li>Click the <strong>Save</strong> button.</li>
+</ol>
+
+<p>You have enabled this application to build on your build servers. For more information see <a href="../for-apps/build-configure.html">Setting Build Server Capabilities</a>.</p>
+
+<h2 id="how-pipelines-for-containers-queues-builds">How Pipelines for Containers queues builds</h2>
+
+<p>Pipelines allows users to build on Pipelines shared build servers and on private build servers. This document discusses those scenarios in more technical depth and how the queuing of builds is processed.</p>
+
+<h3 id="building-on-shared-pipelines-build-servers">Building on Shared Pipelines Build Servers</h3>
+
+<p>When building on Pipelines shared build servers, builds are done in Docker containers.
+Each container has differing software installed to accomodate the builds of different languages.</p>
+
+<p>The following containers are available to build:</p>
+<ul>
+<li>Pipelines Haskell (Docker)</li>
+<li>Pipelines Javascript (Docker)</li>
+<li>Pipelines Java/JVM (Docker)</li>
+<li>Pipelines Python (Docker)</li>
+<li>Pipelines Perl (Docker)</li>
+<li>Pipelines Ruby (Docker)</li>
+<li>Pipelines Go (Docker)</li>
+<li>Pipelines Base (Docker)</li>
+<li>Pipelines PHP (Docker)</li>
+<li>Pipelines Android (Docker)</li>
+<li>Pipelines Legacy (Docker)</li>
+</ul>
+
+<p>Documentation on the containers can be found here: <a href="./build-environment.html">Pipelines Build Environments</a>.</p>
+
+<p>When building on Pipelines shared build servers, the Docker image selected is initiated as a running container. The build then takes place inside of this running container. This provides a pristine environment for each build. When the build is done, the container is destroyed.</p>
+
+<h3 id="build-queuing">Build Queuing</h3>
+
+<p>Builds are queued by Application/Branch.</p>
+
+<p>For example, if I have an application in Pipelines, tied to my repository and am actively building from commits to the <b>Master</b> branch; 3 consequtive commits to the <b>Master</b> branch will cause 3 build tasks to be scheduled. These will be processed on a first-come first-serve basis and will not run in parallel because they are for the same branch.</p>
+
+<p>If instead I am actively building from commits to multiple branches (i.e. branch; Dev1, Feature1, Feature2) and three commits occur, one to each branch, at the same time; Pipelines will build all three branches at the same time (in parallel).</p>
+
+<h3 id="building-on-private-build-servers">Building on Private Build Servers</h3>
+
+<p>When building on private servers with Pipelines, builds are executed, by the agent, on your hardware. A build instructs the Pipelines agent to clone the repository/branch and run the build (PreBuild, Build, AfterBuildSuccess, etc…) steps as indicated in the distelli-manifest.yml. This is typically not done in a Docker container.</p>
+
+<p>For more information on the Pipelines manifest build steps, see <a href="../for-apps/manifest.html">Pipelines Manifest</a>.</p>
+
+<p>Each build is executed in its own unique Directory. When the build completes, the directory is removed.</p>
+
+<p>The queuing of the builds on private build servers is the same schema as queuing on the shared build servers. On private build servers the builds are typically not running in docker containers which means parallel builds can affect each other.</p>
+

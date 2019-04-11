@@ -1,0 +1,125 @@
+<p>With Puppet Pipelines teams and groups you can define permissions for team members. This document will layout the permissions required for example roles.</p>
+
+<h3><a name="groups"></a>Groups</h3>
+
+<p>Permissions are defined in groups. Users are assigned to groups. For more information see:</p>
+
+<ul>
+  <li><a href="./group.html">Group and group permissions documentation</a></li>
+  <li><a href="./users.html">Users documentation</a></li>
+</ul>
+
+<p>To create group permissions you will need to do the following:</p>
+
+<ol>
+  <li>Create a group.</li>
+  <li>Assign permissions to the group.</li>
+  <li>Assign users to the group.</li>
+</ol>
+
+<h3><a name="roles"></a>Roles</h3>
+
+<p>The following are four example roles.</p>
+
+<p><strong>Read-Only</strong> providing read-only access to team activities, including; builds, releases, and deploys.</p>
+
+<p><strong>Deploy and Build any Application</strong> providing the ability to create, build, and deploy any team application.</p>
+
+<p><strong>Deploy and Build a Single Application</strong> providing the ability to build and deploy an application.</p>
+
+<p><strong>Manager</strong> providing the ability to manage the team account.</p>
+
+<p><img src="images/perm-all-groups.png" alt="All Groups" /></p>
+
+<h3><a name="read-only"></a>Read Only</h3>
+
+<p><img src="images/perm-read-only.png" alt="Read-Only Permissions" /></p>
+
+<p>These permissions will allow a user to view most details for the team. They will not be able to deploy or make changes.</p>
+
+<p>A user assigned these permissions can/cannot:</p>
+
+<ul>
+<li>View all applications</li>
+<li>View all application environments</li>
+<li>View all servers</li>
+<li>View all builds</li>
+<li>View all releases</li>
+<li>View all deployments</li>
+<li>Cannot view application settings</li>
+<li>Cannot view environment settings</li>
+<li>Cannot view team global settings</li>
+</ul>
+
+<h3><a name="deploy-and-build-any-application"></a>Deploy and Build any Application</h3>
+
+<p><img src="images/perm-all-apps.png" alt="All Apps Permissions" /></p>
+
+<p>These permissions will allow a user to build and deploy all applications in the team.</p>
+
+<p>A user assigned these permissions can/cannot:</p>
+
+<ul>
+<li>Build and deploy any application</li>
+<li>Deploy to any application environments</li>
+<li>Manage servers</li>
+<li>View all builds</li>
+<li>View all releases</li>
+<li>View all deployments</li>
+<li>Cannot view application settings</li>
+<li>Cannot view environment settings</li>
+<li>Cannot view team global settings</li>
+</ul>
+
+<h3><a name="deploy-and-build-a-single-application"></a>Deploy and Build a Single Application</h3>
+
+<p><img src="images/perm-one-app.png" alt="Permissions One App" /></p>
+
+<p>These permissions will allow a user to build and deploy on a specific application. In this example Applications access is set to No Access and Full Access is granted to one application. Note, you can grant full access to more than one application.</p>
+
+<p><img src="images/perm-one-app-dialog.png" alt="Permissions One App Dialog" /></p>
+
+<p>A user assigned these permissions can/cannot:</p>
+
+<ul>
+<li>Build and deploy a specific application</li>
+<li>Deploy to the specific application environments</li>
+<li>Manage servers</li>
+<li>View all releases</li>
+<li>View all deployments</li>
+<li>Cannot view application settings</li>
+<li>Cannot view environment settings</li>
+<li>Cannot view team global settings</li>
+</ul>
+
+<h3><a name="manager"></a>Manager</h3>
+
+<p><img src="images/perm-manager.png" alt="Permissions Manager" /></p>
+
+<p>A user assigned these permissions can/cannot:</p>
+
+<ul>
+<li>View all applications</li>
+<li>View all application environments</li>
+<li>View all servers</li>
+<li>View all builds</li>
+<li>View all releases</li>
+<li>View all deployments</li>
+<li>View team global setting</li>
+<li>Edit Billing Plan</li>
+<li>Edit Groups</li>
+<li>Edit Team</li>
+<li>Edit Integrations</li>
+<li>Cannot view application settings</li>
+<li>Cannot view environment settings</li>
+<li>Cannot view credentials</li>
+</ul>
+
+<h3><a name="notes"></a>Notes</h3>
+
+<p>To allow a user access to <b>Application Settings</b> they must have Full Control for Applications.</p>
+
+<p>To allow a user access to <b>Environment Settings</b> they must have Full Control for Environments.</p>
+
+<p>To allow a user the ability to <b>Delete Servers</b> they must have Full Control to Agent.</p>
+

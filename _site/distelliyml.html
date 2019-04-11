@@ -1,0 +1,123 @@
+<p>The <code class="highlighter-rouge">distelli.yml</code> file provides authentication credentials for automated use of the Pipelines agent and the Pipelines CLI.</p>
+
+<h3><a name="using-distelli.yml-with-distell-agent"></a>Using distelli.yml with Pipelines agent</h3>
+
+<p>The distelli.yml file allows automated installation of the <a href="./agent.html">Pipelines Agent</a>. To use this feature:</p>
+<ol>
+<li>Create the file in the appropriate location.</li>
+<li>Add the correct credentials.</li>
+<li>Install the Pipelines agent.</li>
+</ol>
+
+<p>When the agent installs, it will use the specified credentials to add the server to the specified Puppet Pipelines account. You can also specify options to automate adding the server to specific environments.</p>
+
+<h4>Linux</h4>
+
+<p>To use the distelli.yml for automating authentication and installation features of the Pipelines agent, the distelli.yml may be placed in the /etc directory.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/distelli.yml
+</code></pre></div></div>
+
+<h4>Windows</h4>
+
+<p>In a Windows environment, the distelli.yml may be placed in the %SystemDrive%.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%SystemDrive%\distelli.yml
+</code></pre></div></div>
+
+<h3><a name="using-distelli.yml-with-distelli-cli"></a>Using distelli.yml with the Pipelines CLI</h3>
+
+<p>To use the distelli.yml for automating authentication with the Pipelines CLI, the distelli.yml file may be placed in the user’s home directory.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/distelli.yml
+</code></pre></div></div>
+
+<p>To view an example of this, see <a href="../for-apps/deployment-ci.html">Auto Deploy from your CI Platform</a>.</p>
+
+<h3><a name="specifying-credentials"></a>Specifying Credentials</h3>
+
+<p>When using the distelli.yml file, the following fields are required:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DistelliAccessToken:
+DistelliSecretKey:
+</code></pre></div></div>
+
+<p>These fields are tied to a Puppet Pipelines account. Ensure you are <a href="./users.html">using the correct account</a> when retrieving these values.</p>
+
+<h4>Retrieving Credentials</h4>
+
+<ol>
+<li>Click the <b>gear</b> icon from the top right.</li>
+<li>Click the <b>Agent</b> icon on the left.</li>
+<li>Under <i>Secret Key</i> click the <b>Show</b> button.</li>
+</ol>
+
+<p>Here you will find the Access Token and Secret Key. Add them to the distelli.yml. For example:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DistelliAccessToken: '12345678901234567890123456'
+DistelliSecretKey: '1234567890123456789012345678901234567'
+</code></pre></div></div>
+
+<p>With this file in place, when you do a Pipelines agent install, you will not be prompted for manual entry of your email credentials. Instead the agent will use the credentials in the distelli.yml file to connect the server to a Puppet Pipelines account.</p>
+
+<h3><a name="specifying-environment"></a>Specifying Environment</h3>
+
+<p>You can specify one or more application environments for this server to join automatically when installing the Pipelines agent and using a distelli.yml. This assumes the environment(s) specified belong to the Puppet Pipelines account associated with the agent access token and secret key.</p>
+
+<p>This feature is enabled in the <b>Environments:</b> section of the /etc/distelli.yml file.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Environments:
+    - ENVIRONMENT1
+    - ENVIRONMENT2
+</code></pre></div></div>
+
+<p>Here is a full example. Access token and secret key are required.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  DistelliAccessToken: '12345678901234567890123456'
+  DistelliSecretKey: '1234567890123456789012345678901234567'
+  Environments:
+    - ENVIRONMENT1
+    - ENVIRONMENT2
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>Important:</strong> If the environment setting “Auto Deploy the Active Release when a new Server joins this environment” is enabled (checked) and there is an active release, an auto deploy will occur when servers join an environment using distelli.yml.
+    For more info, see <a href="../for-apps/environment.html">Environment Settings</a>.</p>
+</blockquote>
+
+<h3><a name="distelliaccesstoken"></a>DistelliAccessToken</h3>
+
+<p>This is the access token associated with a specific Puppet Pipelines account. Provide this, and the secret key, to have the Pipelines agent automatically connect the server to a Puppet Pipelines account on agent installation.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  DistelliAccessToken:
+</code></pre></div></div>
+
+<h3><a name="distellisecretkey"></a>DistelliSecretKey</h3>
+
+<p>This is the secret key associated with a specific Pipelines account. Provide this to have the Pipelines agent automatically connect the server to a Puppet Pipelines account on agent installation.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  DistelliSecretKey:
+</code></pre></div></div>
+
+<h3><a name="environments"></a>Environments</h3>
+
+<p>This section of the file allows the user to specify application environment(s) that the server should be automatically be added to when installing the Pipelines agent.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Environments:
+    - ENVIRONMENT_NAME_1
+    - ENVIRONMENT_NAME_2
+</code></pre></div></div>
+
+<h3><a name="login-the-distelli-cli"></a>Log into the Pipelines CLI</h3>
+
+<p>To use the distelli.yml for authenticating the Pipelines CLI, use this syntax:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>distelli login -conf ~/distelli.yml
+</code></pre></div></div>
+
+<h3><a name="login-the-distelli-agent"></a>Log into the Pipelines Agent</h3>
+
+<p>To use the distelli.yml for authenticating the Pipelines agent, use this syntax:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>distelli agent install -conf /etc/distelli.yml
+</code></pre></div></div>

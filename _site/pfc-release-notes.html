@@ -1,0 +1,49 @@
+<p>New features, enhancements, known issues, and resolved issues for the Pipelines for Containers 3.x release series.</p>
+
+<h2 id="version-320-next">Version 3.2.0-NEXT</h2>
+
+<p>Release Target 20 August 2018</p>
+
+<p>New in this release</p>
+<ul>
+  <li><strong>Trigger customer Helm Chart builds on source changes in Pipelines</strong>. Add custom Helm Charts from source control to Pipelines and build automatically as source changes.</li>
+</ul>
+
+<p>Resolved in this release:</p>
+<ul>
+  <li>Adding search filters on branch selection for container builds caused the branch list to be hidden.</li>
+</ul>
+
+<h2 id="version-310-431790">Version 3.1.0-431790</h2>
+
+<p>Released 31 July 2018</p>
+
+<p>New in this release:</p>
+
+<ul>
+  <li><strong>Build and deploy your own custom Helm Charts from source</strong>. In addition to deploying Helm Charts from public repos, you can now build and deploy your own custom Charts.</li>
+</ul>
+
+<h2 id="version-3023-426036">Version 3.0.23-426036</h2>
+
+<p>Released July 19 2018</p>
+
+<p>New in this release:</p>
+
+<ul>
+  <li>Removed Distelli branding across the user interface.</li>
+  <li>When connecting to an RBAC-enabled K8s cluster, you’re now prompted to set the correct cluster permissions.</li>
+  <li>Docker Hub credentials are now validated when you add a new container.</li>
+</ul>
+
+<h2 id="known-issues">Known issues</h2>
+
+<p><strong>Renamed required status check for protected branches in GitHub and GitHub Enteprise</strong>
+As part of our rebranding efforts, we renamed a required status check for protected branches in GitHub and GitHub Enterprise. Users of protected branches who have enabled this required status check must follow the instructions below to switch to the new status check.</p>
+
+<p>To fix this issue:</p>
+
+<ol>
+  <li>In the GitHub or GitHub enterprise web UI, go to your repository’s <strong>Settings</strong> and click <strong>Branches</strong>, then click <strong>Edit</strong> next to your protected branch.</li>
+  <li>In the status checks area, deselect <strong>continuous-integration/distelli</strong> and select <strong>continuous-integration/puppet</strong>, then save your changes.</li>
+</ol>
