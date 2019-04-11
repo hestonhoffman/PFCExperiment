@@ -16,7 +16,6 @@ Integrations in Pipelines for use with Pipelines for Containers include:
     <ul>
       <li>GKE</li>
       <li>AWS</li>
-      <li>Azure</li>
       <li>Bare Metal</li>
       <li>Other</li>
     </ul>
@@ -38,7 +37,7 @@ The master settings for integrating with a repository can be found in your accou
 
 1. Click the "Connect REPO Account" button for the repository you wish to integrate with. You may be prompted to login to the repository and to approve access to the repository. If you have integrated Pipelines previously, you may not be prompted at all. 
 
-Once you have approved the integration on the repository, they are integrated.
+After you have approved the integration on the repository, they are integrated.
 
 ## Remove Pipelines integration from GitHub
 
@@ -48,7 +47,7 @@ To completely remove Pipelines integration with GitHub:
 1. Click <b>Integrations</b> link on the left.
 1. Select the repository you wish to remove, and click **Disconnect REPO Account**. 
 1. Log in to your GitHub account and go to the **Settings** page.
-1. On the GitHub settings page click the <b>Applications</b> link. Under Authorized applications, find Distelli Inc. and click the <b>Revoke</b> button.</li>
+1. On the GitHub settings page click the <b>Applications</b> link. Under Authorized applications, find Distelli Inc. and click the <b>Revoke</b> button.
 
 ### Remove GitHub repository webhooks or services
 
@@ -61,7 +60,7 @@ To remove a webhook from a specific repository in GitHub:
 <li>Remove the hook or service you wish.</li>
 </ol>
 
-## Remove Pipelines Integration from Bitbucket</h3>
+## Remove Pipelines Integration from Bitbucket
 
 To completely remove Pipelines integration with Bitbucket:
 
@@ -69,10 +68,10 @@ To completely remove Pipelines integration with Bitbucket:
 1. Click <b>Integrations</b> link on the left.
 1. Select the repository you wish to remove, and click **Disconnect REPO Account**.
 1. Log in to your Bitbucket account and go to the Bitbucket <b>Manage account</b> page.
-1. On the **Manage** page click the <b>OAuth</b> link.</li>
+1. On the **Manage** page click the <b>OAuth</b> link.
 1. Under OAuth integrated applications, find Distelli Inc and click the <b>Revoke</b> link.
 
-### Remove Bitbucket Repository Webhooks or Services</h3>
+### Remove Bitbucket Repository Webhooks or Services
 
 To remove a webhook from a specific repository in Bitbucket:
 <ol>

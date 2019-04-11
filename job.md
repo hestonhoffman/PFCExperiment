@@ -3,171 +3,70 @@ layout: default
 title: "Kubernetes jobs"
 ---
 
-With jobs in Pipelines for Containers you can automate the execution of Kubernetes jobs based on successful builds of containers and/or K8S deployments.
+A Kubernetes job is a finite-length task that runs to completion. A job doesn&rsquo;t run continuously on a cluster, and doesn&rsquo;t require ongoing management from Kubernetes. After all of its pods have successfully terminated, they close down, and the job is complete; Kubernetes does not restart the pods.
 
-Jobs can be manually executed or automated in a Kubernetes automation pipeline.
+If you&rsquo;re building something that runs continually on a cluster, and requires ongoing management from Kubernetes, see [Deployments](./deployment-set-up.html).
 
-Just like all things in Pipelines, you will know who ran a job and what, exactly, was run. This includes the log results from the job.
-
-You can find <b>Jobs</b> in the Pipelines for Containers web UI.
+With jobs in Pipelines for Containers, you can dispatch a job manually, or dispatch it automatically inside a pipeline. If you&rsquo;re working on a team, you&rsquo;ll always know who ran a job, and what was run. You also have access to logs for each job.
 
 ## Create a job
 
-Creating a Kubernetes job in Pipelines is easy. You can supply a Kubernetes job specification in YAML format or use the Pipelines job creation widget.
-
-<h2>Creating a Job</h2>
-
-To create a Kubernetes job in Pipelines:
-
-<ol>
-  <li>Ensure you are on the <b>Pipelines for Containers web UI</b>. You can set this from the drop down at the top left of the Pipelines web UI.</li>
-  <li>Click <b>Jobs</b> from the top menu.</li>
-  <li>Click the <b>Create New Job</b> button.</li>
-
-  <p>The job creation widget will appear</p>
-
-  <img src="images/jobs-create-job-widget1.png" alt="Jobs job list">
-
-  <p>If you'd like to create the job from an existing Kubernetes job specification, you can simply click the <b>YAML</b> button and paste the specification YAML text.</p>
-
-  <img src="images/jobs-create-from-yaml.png" alt="Create from YAML">
-
-  <p>If creating the job with the job widget, please continue.</p>
-
-  <li>Select a <b>Cluster</b>.</li>
-  <li>Select a <b>Namespace</b>.</li>
-  <li>Enter a <b>Name</b> for the job.</li>
-  <li>Enter an optional <b>Description</b> for the job.</li>
-  <li>Click <b>Containers</b>.</li>
-  
-  <p>Here you can add multiple containers to execute arbitrary commands</p>
-
-  <img src="images/jobs-create-from-widget1.png" alt="Create from Widget container">
-
-  <p>The container fields are as follows:</p>
-
-  <ul>
-    <li><b>Container Name</b> - A name you assign the container. If there are multiple containers in the job, they all must have a unique container name.</li>
-    <li><b>Container Image</b> - This is the image that is pulled to run the job command. Valid images may include: gcr.io/project/image:tag, distelli/europa-enterprise, mysql:5.7, perl, etc...</li>
-    <li><b>Command</b> - The command to run when the image spins up. This is the job being run.</li>
-    <li><b>Args</b> - This is the arguments to be used with the above command.</li>
-  </ul>
-
-  <li>Click <b>Add Container</b> when you are ready.</li>
-  <li>Now, on the left, click the container name that you just added.</li>
-
-  <img src="images/jobs-edit-container1.png" alt="Click container name">
-
-  <p>This will take you to the container edit options where you can set the values for the container, including:</p>
-
-  <ul>
-    <li><b>Overview</b> - To view an overview of the containers current configuration.</li>
-    <li><b>Command & Args</b> - Here you can edit the job command and arguments to be executed.</li>
-    <li><b>Port Mappings</b> - Here you can create and delete network port mappings.</li>
-    <li><b>Volume Mounts</b> - Here you can manage multiple volume mounts.</li>
-    <li><b>Environment Variables</b> - Here you can create multiple types of environment variables.</li>
-  </ul>
-
-  <li>Next, click <b>Configuration</b> on the left.</li>
-
-  <img src="images/jobs-edit-configuraiton1.png" alt="Click container name">
-
-  <p>Configuration is where you set your main job parameters. They include:</p>
-
-  <ul>
-    <li><b>Active Deadline Seconds</b> - The duration in seconds relative to the startTime that the job may be active before the system tries to terminate it.</li>
-    <li><b>Completions</b> - The desired number of successfully finished pods the job should be run with.</li>
-    <li><b>Parallelism</b> - The maximum desired number of pods the job should run at any given time.</li>
-    <li><b>Restart Policy</b> - The restart policy for all containers within the pod. This can be <b>Never</b> or <b>OnFailure</b>.</li>
-  </ul>
-
-  <li>When you are ready, click <b>Volumes</b> on the left.</li>
-
-  <p>This is where you manage your jobs volumes. All volume types are supported.</p>
-
-  <li>When you are done, click <b>Save Job</b>.</li>
-
-</ol>
-
-This job can now be dispatched manually or be added to a pipeline for automated dispatch.
-
-## Dispatch a job
-
-Once you have created a job, you can easily manually dispatch it. 
-
-During the dispatch of a job a user can change some values for that single job run and those values will get set back to defaults on future runs.
-
-
-<h2>Manual Dispatch a K8S Job</h2>
-
-This assumes you have already created a job.
-
-<ol>
-  <li>From the Pipelines for Containers web UI, click the <b>Jobs</b> link at the top.</li>
-  <li>For the job you want to dispatch, click the <b>Dispatch Job</b> icon.</li>
-
-  <img src="images/jobs-run-job1.png" alt="dispatch job icon">
-
-  <p>At this time you can adjust any of the values for this specific job dispatch. These values will be reset on next job dispatch.</p>
-
-  <li>When you are ready, click the <b>Dispatch Job</b> button.</li>
-</ol>
-
-If your job fails for any reason, you will be shown an error message that should provide some explanation for the failure.
-
-When your job dispatches successfully, you will see the message <b>Job has been dispatched.</b>
-
-Click the <b>Please "click here" to view your jobs details</b> to navigate to the job details page.
-
-<img src="images/jobs-run-job-details1.png" alt="dispatch job icon">
-
-Note, you can cancel a dispatched running job with the <b>Cancel Job</b> button at the top right.
-
-After you have created and dispatched a job, you can view the job history and details for previous job dispatches. You can also view and edit jobs.
-
-<h2>View or Edit a Job</h2>
-
-To view a single job and see its default settings simply click the <b>Edit Job</b> icon for the job you wish to view.</li>
-
-<img src="images/jobs-edit-job1.png" alt="dispatch job icon">
-
-Here you can view the default settings for your job.
-
-This is where you edit your job and save any changes.
-
-<h2>View a Job's Details</h2>
-
-The <b>Job History</b> shows you any running and previously dispatched jobs. Clicking on a job dispatch here in the job history will navigate you to the job details page for that specific job dispatch.
-
-You can filter the Job History list by job by selecting the job.
-
-<img src="images/jobs-filter-job-history.png" alt="dispatch job icon">
-
-Click on a job in the job history list to see its details.
-
-The job details show the specifics of the job; all the parameters used, status, logs, and more.
-
-You can quickly see the status of the job at the top left.
-
-<img src="images/jobs-job-details2.png" alt="dispatch job icon">
-
-If you click <b>View YAML</b> you can see the exact job specification that was sent to the cluster.
-
-<h2>View a Jobs Output</h2>
-
-Job logs contain the output of the job. Pipelines manages gathering these logs from the pod after the job has completed. After the logs are retained, the job and pod(s) are deleted from the cluster.
-
-To view a jobs logs, navigate to the job details page. You can do this by clicking on the job dispatch in the job history.
-
-Next, click <b>Show Log</b> for the container whose output you want to see. If your job had more than one container, you can see the logs for each container. The below example has 2 containers, perl1 and perl2.
-
-<img src="images/jobs-job-logs1.png" alt="dispatch job icon">
-
-
-
-
-
-
-
-
+1. In Pipelines, select your project.
+1. Click **Jobs**.
+1. Click **Create New Job**.
+1. To create the job from an existing Kubernetes job specification:
+   1. Click **YAML** and paste in your YAML specification.
+   1. Click **Save Job**.
+1. Otherwise, to create a job:
+   1. Click **Select Cluster**, and select your cluster. 
+   1. Click **Select Namespace** and select a namespace. 
+   1. Enter a job name and a helpful description.
+   1. Click **Containers** and complete each of these fields:
+      * **Container Name**: A unique name for the container.
+      * **Container Image**: An image to pull to run the job command, for example: `gcr.io/<YOUR_PROJECT_NAME>/<YOUR_IMAGE>:tag` or `mysql:5.7`.  
+      * **Command**: The command to run when the image spins up. This is the job. For example: `perl`.
+      * **Args**: Enter the arguments used with the above command, for example:
+        
+        ```
+        -Mbignum=bpi
+        -wle
+        -print bpi(2000)
+        ````
+
+    1. Click **Add Container**.
+    1. (Optional) Select the container you just added and configure port mappings, volume mounts, and environment variables. 
+    1. Click **Configuration** and set your job parameters:
+       * **Active Deadline Seconds**: The time in seconds, relative to its start time, that the job can be active before the system tries to terminate it.
+       * **Completions**: The number of pods that need to run to completion before the job is finished.
+       * **Parallelism**: The maximum number of pods the job runs at any given time.
+       * **Restart Policy**: The restart policy for all containers within the pod. This can be **Never** or **OnFailure**.
+    1. If you specified volume mounts for your containers, click **Volumes** to add them to your Job. 
+    1. Click **Save Job**.
+
+You've created your job and configured its default parameters. You can dispatch it manually, or automatically by adding it to a pipeline. To change the parameters for a job, find it on the **Jobs** page and click **Edit Job**.
+
+## Run a job manually
+    
+After you’ve created a job, you can dispatch it manually.
+1. In Pipelines, select your project.
+1. Click **Jobs**.
+1. Click **Dispatch Job** next to the job you want to dispatch.
+1. (Optional) Adjust the values for this specific job. Parameters you change now will return to their previous values on future dispatches.
+1. Click **Dispatch Job** and wait for the verification that your job ran successfully.
+
+> **Note**: You can cancel a running job by clicking Cancel Job.
+
+## View job history and details
+
+To view a running, or previously dispatched job’s history, select it on the **Jobs** page. Click on an instance in the **Job History** column to see more details about that specific dispatch. These details include the parameters used, the job status, and job logs.
+
+## View a job log
+
+After a job has completed, Pipelines gathers logs from the job’s containers, and deletes the job and its pods from the cluster. 
+
+To view a job’s logs:
+1. In Pipelines, select your project.
+1. Click **Jobs**.
+1. Select a job dispatch in the **Job History** column.
+1. Click **Show Log** next to the container you want to view.
 

@@ -3,11 +3,11 @@ layout: default
 title: "Docker build environments"
 ---
 
-The below information represents the Pipelines for Applications Docker build environments when doing builds using the `distelli-manifest.yml` file with Pipelines build servers.
+The below information represents the Pipelines for Containers Docker build environments when doing builds using the `distelli-manifest.yml` file with Pipelines build servers.
 
 <h3><a name="distelli-build-docker-specs"></a>Docker build image specs</h3>
 
-The below table shows what version of tools are available in which Pipelines for Applications Docker build image.
+The below table shows what version of tools are available in which Pipelines for Containers Docker build image.
 
 <table width="100%" cellpadding="4" cellspacing="0">
 	<col width="93*">
@@ -28,37 +28,37 @@ The below table shows what version of tools are available in which Pipelines for
 			</p>
 		</td>
 		<td width="6%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.04in; padding-bottom: 0.04in; padding-left: 0.04in; padding-right: 0.04in">
-			Haskell</font></p>
+			Haskell
 		</td>
 		<td width="6%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.04in; padding-bottom: 0.04in; padding-left: 0.04in; padding-right: 0.04in">
-			Javascript</font></p>
+			Javascript
 		</td>
 		<td width="6%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.04in; padding-bottom: 0.04in; padding-left: 0.04in; padding-right: 0.04in">
-			Java/JVM</font></p>
+			Java/JVM
 		</td>
 		<td width="6%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.04in; padding-bottom: 0.04in; padding-left: 0.04in; padding-right: 0.04in">
-			Python</font></p>
+			Python
 		</td>
 		<td width="6%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.04in; padding-bottom: 0.04in; padding-left: 0.04in; padding-right: 0.04in">
-			Perl</font></p>
+			Perl
 		</td>
 		<td width="6%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.04in; padding-bottom: 0.04in; padding-left: 0.04in; padding-right: 0.04in">
-			Ruby</font></p>
+			Ruby
 		</td>
 		<td width="6%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.04in; padding-bottom: 0.04in; padding-left: 0.04in; padding-right: 0.04in">
-			Go</font></p>
+			Go
 		</td>
 		<td width="6%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.04in; padding-bottom: 0.04in; padding-left: 0.04in; padding-right: 0.04in">
-			Base</font></p>
+			Base
 		</td>
 		<td width="6%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.04in; padding-bottom: 0.04in; padding-left: 0.04in; padding-right: 0.04in">
-			PHP</font></p>
+			PHP
 		</td>
 		<td width="6%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.04in; padding-bottom: 0.04in; padding-left: 0.04in; padding-right: 0.04in">
-			Android</font></p>
+			Android
 		</td>
 		<td width="6%" bgcolor="#808080" style="border: 1px solid #000000; padding: 0.04in">
-			Legacy</font></p>
+			Legacy
 		</td>
 	</tr>
 	<tr valign="top">
@@ -2233,7 +2233,7 @@ The below table shows what version of tools are available in which Pipelines for
 
 <b>X</b> - Available and working in this image
 
-<h3><a name="legacy-image-specifications"></a>Legacy Image Specifications</h3>
+<h3><a name="legacy-image-specifications"></a>Legacy image specifications</h3>
 
 <ul>
 	<li><b>OS Specifications</b></li>
@@ -2284,7 +2284,7 @@ The below table shows what version of tools are available in which Pipelines for
 	</ul>
 </ul>
 
-For more information on installing build dependencies see [Build Language Reference](../for-apps/build-language.html) and see [Installing Dependencies](../for-apps/manifest-dependencies.html).
+For more information on installing build dependencies see [Build Language Reference](https://puppet.com/docs/pipelines-for-apps/enterprise/build-language.html) and see [Installing Dependencies](https://puppet.com/docs/pipelines-for-apps/enterprise/manifest-dependencies.html).
 
 <h3><a name="hardware"></a>Hardware</h3>
 

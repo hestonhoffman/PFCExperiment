@@ -2,7 +2,7 @@
 layout: default
 title: "The Pipelines CLI"
 ---
-<br>
+
 The Pipelines CLI provides command line functionality for interfacing with the Pipelines SaaS. 
 
 The Pipelines CLI and Pipelines agent are unified into one package.
@@ -13,18 +13,18 @@ The Pipelines CLI is used to create, build, push, and deploy applications. With 
 
 <h4><a name="linux-and-mac-os-x"></a>Linux and macOS X</h4>
 
-To install on Linux/Mac you can use either curl <b>or</b> wget with one of the following syntaxes.
+To install on Linux/macOS you can use either curl <b>or</b> wget with one of the following syntaxes.
 
 <h5>wget example</h5>
 
 ~~~
-wget -qO- https://www.distelli.com/download/client | sh
+wget -qO- https://pipelines.puppet.com/download/client | sh
 ~~~
 
 <h5>curl example</h5>
 
 ~~~
-curl -sSL https://www.distelli.com/download/client | sh
+curl -sSL https://pipelines.puppet.com/download/client | sh
 ~~~
 
 <h4><a name="windows"></a>Windows</h4>
@@ -32,12 +32,12 @@ curl -sSL https://www.distelli.com/download/client | sh
 To install on Windows, copy and paste the following PowerShell command into a command (cmd) window.
 
 ~~~
-powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://www.distelli.com/download/client.ps1'))" & SET PATH=%PATH%;%ProgramFiles%/Distelli
+powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://pipelines.puppet.com/download/client.ps1'))" & SET PATH=%PATH%;%ProgramFiles%/Distelli
 ~~~
 
-<h3><a name="login-and-validate"></a>Login and Validate</h3>
+<h3><a name="login-and-validate"></a>Log in and validate</h3>
 
-To complete, and validate, the CLI installation; issue a `distelli login` command to login to your Puppet Pipelines account.
+To complete, and validate, the CLI installation; issue a `distelli login` command to log into your Puppet Pipelines account.
 
 > **Important:** This requires that you have already completed the [Creating an Account](./account.html) steps.
 
@@ -48,9 +48,11 @@ Email: jdoe@distelli.com
 Password:
 ~~~
 
+> **Important:** If you enter your account password incorrectly too many times, a `Failed to login to your Distelli Account, Please check your credentials` message will appear, and your account will be locked as a security precaution. The lock expires in two hours. 
+
 ## Upgrading the CLI
 
-To upgrade the Pipelines CLI, simply re-install the CLI on top of the existing CLI. This will perform an upgrade.
+To upgrade the Pipelines CLI, re-install the CLI on top of the existing CLI. This will perform an upgrade.
 
 ## CLI events
 
@@ -79,7 +81,7 @@ distelli event -app bmcgehee/cli-demo -type build -build Jenkins:1234 -build-url
   <tr><td>All</td><td>No</td><td>Location of profile information (like cached credentials), defaults to ~/, may also be set via DISTELLI_PROFILE environment variable.</td></tr>
 
   <tr><td colspan="3"><b>-app &lt;See Explanation&gt;</b></td></tr>
-  <tr><td>All</td><td>Yes</td><td>For the VM Dashboard, the format is: USERNAME/APP-NAME<br>
+  <tr><td>All</td><td>Yes</td><td>For Pipelines for Applications, the format is: USERNAME/APP-NAME<br>
 For Pipelines for Containers, the format is: USERNAME/PROJECT-NAME.CONTAINER-NAME</td></tr>
 
   <tr><td colspan="3"><b>-type &lt;EVENT-TYPE&gt;</b></td></tr>
@@ -92,7 +94,7 @@ For Pipelines for Containers, the format is: USERNAME/PROJECT-NAME.CONTAINER-NAM
   <tr><td>Build</td><td>No</td><td>The URL to the build.</td></tr>
 
   <tr><td colspan="3"><b>-build-status &lt;BUILD-STATUS&gt;</b></td></tr>
-  <tr><td>Build</td><td>No</td><td>The current status of the build. This can be updated when using the same BUILD-ID. Valid Status' include:<br><ul><li>Queued</li><li>Waiting</li><li>Running</li><li>*TimedOut</li><li>*Failed</li><li>*Success</li></ul>* These are terminal conditions and once set cannot be changed.</td></tr>
+  <tr><td>Build</td><td>No</td><td>The current status of the build. This can be updated when using the same BUILD-ID. Valid Status' include:<br><ul><li>Queued</li><li>Waiting</li><li>Running</li><li>*TimedOut</li><li>*Failed</li><li>*Success</li></ul>* These are terminal conditions. After you set them, they cannot be changed.</td></tr>
 
   <tr><td colspan="3"><b>-build-start &lt;ISO-8601-DATE-TIME&gt;</b></td></tr>
   <tr><td>Build</td><td>No</td><td>When the build started. If a new build event is created, this value does not need to be specified and will default to <b>now</b>. Format example: 2016-12-09T14:25:33Z</td></tr>
@@ -151,15 +153,15 @@ The above flow represents:
   <li>Starting a build in status Queued or Waiting.</li>
   <li>Updating the build status to Running.</li>
   <li>Updating the build termination status to either Timedout, Failed, or Success.</li>
-  <li>The final "image" event would only be necessary if there was a Docker image built during the build process.</li>
+  <li>The final "image" event would be necessary only if there was a Docker image built during the build process.</li>
 </ul>
 
 
-<h3>Push & PR Events</h3>
+<h3>Push and pull request events</h3>
 
-A Push or PR event in Pipelines represents a software code event. Typically in Continuous Integration (CI), when a developer checks in code (push) it triggers a build system to initiate a build. In the scenario where a Puppet Pipelines user is using a third-party build system, the Pipelines CLI events can accommodate the creation of a Push or PullRequest event in the Pipelines application history. This event, in Pipelines, can provide links to the repository and commit.
+A Push or pull request (PR) event in Pipelines represents a software code event. Typically in Continuous Integration (CI), when a developer checks in code (push) it triggers a build system to initiate a build. In the scenario where a Puppet Pipelines user is using a third-party build system, the Pipelines CLI events can accommodate the creation of a Push or PullRequest event in the Pipelines application history. This event, in Pipelines, can provide links to the repository and commit.
 
-If the Pipelines CLI event type "Push" (or PullRequest) is executed from the root of a directory; where the software being built was cloned to, and there is a .git or .hg directory, the Pipelines CLI can gather all the information necessary related to the last commit (push). One can simply run:
+If the Pipelines CLI event type "Push" (or PullRequest) is executed from the root of a directory; where the software being built was cloned to, and there is a .git or .hg directory, the Pipelines CLI can gather all the information necessary related to the last commit (push). Run:
 
 ~~~
 distelli event -app USERNAME/APP-NAME -type push | pullrequest 
@@ -173,7 +175,7 @@ distelli event -app bmcgehee/example-node-docker -type push | pullrequest -commi
 
 > **Caution:** If the directory where the <code>distelli event -type push | pullrequest</code> occurs has a .git or .hg directory, Pipelines will attempt to get the commit id SHA and the commit message. These values will override any specified as command line options.
 
-<h3>Build Events</h3>
+<h3>Build events</h3>
 
 A build event, in Pipelines, will provide a means for users to navigate to the build. This event will also live track the status of the build. And provide information on when the build started, stopped, and duration.
 
@@ -190,7 +192,7 @@ The above will create a build event, in Pipelines, identified by BUILD-ID xyz345
 <img src="images/newcli-build-status.png" alt="Build status">
 
 
-<h3>Image Events</h3>
+<h3>Image events</h3>
 
 An <b>Image</b> event in Pipelines represents an image that was built. If using a third-party build system to build Docker images, these images are tracked in Pipelines.
 

@@ -21,6 +21,12 @@ With Pipelines for Applications builds you can build on one of the many existing
 
 For more information on these build images, see [Pipelines Build Environments](./build-environment.html). 
 
+> **Important:** The Pipelines build servers use [the IP addresses housed in this GitHub repostory](https://github.com/puppetlabs/pipelines-ips). 
+>
+> If your organization requires a whitelist of IP adresses, such as for a firewall, we strongly recommend watching this repository for changes. 
+>
+> If whitelisting IP addresses isn't an option, see our documentation on [setting up your own build servers](./build-hardware.html#use-your-own-build-server). 
+
 You can further enhance this list with your own custom-built Docker images. To add a custom-built image to the shared image list, you create a Docker Dockerfile and build it with Pipelines for Applications. Simply navigate to the completed Docker image details page in the Pipelines web UI and mark that image as a build image.
 
 ## Image requirements
@@ -67,7 +73,7 @@ RUN sudo apt-get update -y \
 RUN sudo sh -c "ssh-keyscan -H github.com bitbucket.org >> /etc/ssh/ssh_known_hosts"
 
 # Install Distelli CLI to coordinate the build in the container
-RUN curl -sSL https://www.distelli.com/download/client | sh 
+RUN curl -sSL https://pipelines.puppet.com/download/client | sh 
 
 # Install Docker
 # Note. This is only necessary if you plan on building Docker images
@@ -132,9 +138,9 @@ DISTELLI_USERNAME/APP_NAME:
 
 You can fork my repository at [https://github.com/doct15/docker-build-example](https://github.com/doct15/docker-build-example).
 
-1. Add this repository to a new Pipelines application. For more info on creating applications, see [Creating and Building an Application](../for-apps/application-create.html).
+1. Add this repository to a new Pipelines application. For more info on creating applications, see [Creating and Building an Application](https://puppet.com/docs/pipelines-for-apps/enterprise/application-create.html).
 
-    While creating your new application, ensure you configure a Docker registry to store your build image. For more info see [Enabling Docker for New Applications](../for-apps/docker.html) or see [Enabling Docker for Existing Applications](../for-apps/docker.html).
+    While creating your new application, ensure you configure a Docker registry to store your build image. For more info, see [Enabling Docker for New Applications](https://puppet.com/docs/pipelines-for-apps/enterprise/docker.html) or see [Enabling Docker for Existing Applications](https://puppet.com/docs/pipelines-for-apps/enterprise/docker.html).
 
 
 <img src="images/sbi-my-app.png" alt="my example app">

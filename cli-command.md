@@ -82,7 +82,7 @@ After cloning, launch the build commands within the specified virtual machine. I
 
 <h4>USAGE</h4>
 
-By default, with no options, this command will look in the local ./distelli-manifest.yml file at the [Build sections](../for-apps/manifest-build.html) and run those steps. Then the artifacts will be [bundled and pushed](./cli-command.html).
+By default, with no options, this command will look in the local ./distelli-manifest.yml file at the [Build sections](https://puppet.com/docs/pipelines-for-apps/manifest-build.html) and run those steps. Then the artifacts will be [bundled and pushed](./cli-command.html).
 
 ~~~
 distelli build
@@ -90,7 +90,7 @@ distelli build
 
 <h4>EXAMPLES</h4>
 
-Doing a simple build
+Doing a basic build
 
 ~~~
 distelli build
@@ -166,7 +166,7 @@ APPNAME-YYYY-MM-DD-HH-MM-SS-MD5SUM.tar.gz
 
 <h4>EXAMPLES</h4>
 
-Doing a simple bundle
+Doing a basic bundle
 
 ~~~
 $ distelli bundle
@@ -233,7 +233,7 @@ distelli deploy -e|--env <environment> [-d|--stagger-delay <stagger-delay>] [-f|
 
 <h4>OPTIONS</h4>
 
-> **Important:** The `-h | --hosts` option has been deprecated. If you need to deploy to a single server, create an environment with just that one server in the environment.
+> **Important:** The `-h | --hosts` option has been deprecated. If you need to deploy to a single server, create an environment with only that server in the environment.
 
 > **Note:** The `-e | --env` option is required.
 
@@ -271,7 +271,7 @@ This option indicates that the CLI should not monitor the deployment and exit im
 -r|--release <release-version>
 ~~~
 
-This option will instruct the deploy to use a specific existing application release. For more information on release ID's see [Finding a Release ID](../for-apps/release.html).
+This option will instruct the deploy to use a specific existing application release. For more information on release ID's see Pipelines for Applications: [Finding a Release ID](https://puppet.com/docs/pipelines-for-apps/enterprise/release.html).
 
 ~~~
 -s|--stagger-size <stagger-size>
@@ -393,9 +393,9 @@ Which will result in a PATH of:
 ~~~
 
 
-<h2>Extending Agent Deploy PATH</h2>
+<h2>Extending agent deploy PATH</h2>
 
-You can update the PATH during deploys by using the Env: section of the [Pipelines manifest](../for-apps/manifest.html). The Env: section of the manifest allows you to provide environment variables used during every phase of the deploy. Here is an example:
+You can update the PATH during deploys by using the Env: section of the [Pipelines manifest](https://puppet.com/docs/pipelines-for-apps/manifest.html). The Env: section of the manifest allows you to provide environment variables used during every phase of the deploy. Here is an example:
 
 ~~~
 Env:
@@ -519,6 +519,7 @@ Email: jdoe@example.com
 Password:
 ~~~
 
+> **Important:** If you enter your account password incorrectly too many times, a `Failed to login to your Distelli Account, Please check your credentials` message will appear, and your account will be locked as a security precaution. The lock expires in two hours. 
 ## push
 
 Bundle a release of your application and push it to a Puppet Pipelines account.
@@ -546,7 +547,7 @@ Provides a message for this release.
 -release-notes
 ~~~
 
-This option will prompt the user for a multi-line input of text that will be used as the "release notes" in the web UI. For more information see [Viewing Release Notes](../for-apps/release.html).
+This option will prompt the user for a multi-line input of text that will be used as the "release notes" in the web UI. For more information see [Viewing Release Notes](https://puppet.com/docs/pipelines-for-apps/release.html).
 
 
 ~~~
@@ -571,7 +572,7 @@ Disable the progress bar
 
 <h4>USAGE</h4>
 
-Use the `distelli push` command to bundle and upload your release for potential future deployments. During a push, the distelli-manifest.yml [PreRelease](../for-apps/manifest-build.html) section is executed.
+Use the `distelli push` command to bundle and upload your release for potential future deployments. During a push, the distelli-manifest.yml [PreRelease](https://puppet.com/docs/pipelines-for-apps/enterprise/manifest-build.html) section is executed.
 
 <h4>EXAMPLES</h4>
 

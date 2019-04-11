@@ -5,66 +5,43 @@ title: "Cluster namespaces"
 
 Namespaces allow you to partition your cluster into separate logical areas.
 
-With Pipelines role based access control, permission to a namespace can be locked down to specific users.
+With Pipelines, you can use role based access control (RBAC) to lock a namespace down to specific users. Namespaces dictate the different stages in your pipelines, so make sure you're using a naming convention like *application-stage*. For example, a pipeline for a WordPress site may use *wordpress-dev*, *wordpress-stage*, and *wordpress-prod* namespaces.    
 
-## Create a Namespace
+For more information on Pipelines RBAC, see [Access management](./group.html)
+
+## Create a namespace
 
 To create a namespace in your cluster:
 
-<ol>
-  <li>Select <b>Clusters</b> from the top menu in the Pipelines for Containers web UI.</li>
-  <li>From the list of clusters being managed by Pipelines, select the one you wish to add a namespace to.</li>
-  <li>Click the <b>Namespace Settings</b> gear to the right.</li>
-
-  <img src="images/europak8s-namespace-settings.png" alt="Namespace Settings">
-
-  <p>You will see the <b>Add/Remove Namespaces</b> control room.</p>
-
-  <img src="images/europak8s-namespace-add-remove.png" alt="Namespace Settings add remove">
-  
-  <li>Click the <b>Create Namespace</b> button.</li>
-  <li>Enter a <b>Name</b> for the namespace.</li>
-  <li>Click <b>Create</b> to create the namespace.</li>
-</ol>
+1. Log into your Pipelines account. 
+1. Click on **Clusters** and select your cluster.
+1. Click **Namespaces**.
+1. Enter a name for your namespace: for example, *wordpress-dev*.
+1. Click **Create Namespace**.
 
 You have created a new namespace in your cluster.
 
-## Remove a Namespace
+## Remove a namespace
 
-Follow the above instructions to navigate to the <b>Namespace Settings</b>.
-
-Click the <b>trash can icon</b> to delete a namespace.
-
-<img src="images/europak8s-namespace-trash.png" alt="Namespace Settings add remove">
+1. Log into your Pipelines account. 
+1. Click on **Clusters** and select your cluster.
+1. Click **Namespaces**.
+1. Click the trash can next to the namespace you want to delete.
 
 > **Note:** Some existing namespaces are critical to the Kubernetes system and should not be removed. Removing one could render your cluster unusable.
 
 ## Create namespace secrets
 
-<h3>Create Secrets</h3>
+1. From your projects page, click on **Secrets**.
+1. Select your cluster.
+1. Click **Create New Secret**.
+1. Select a namespace.
+1. Enter a secret name.
+1. Enter the secrets as key=value, one per line. For example:
+   <img src="images/europak8s-create-new-secrets-europa.png" alt="Create new Secrets">
+1. Click **Create Secret**.
 
-You can manage your cluster namespace secrets from a project or from a cluster details page. The experience is the same.
-
-<ol>
-  <li>Click the <b>Secrets</b> tab.</li>
-
-  <img src="images/europak8s-secrets-icon.png" alt="Secrets icon">
-
-  <li>Select (click) the <b>Cluster</b> you wish to manage secrets.</li>
-
-  <p>You will be shown all of the existing namespace secrets in the chosen cluster.</p>
-
-  <li>Click <b>+ Add New Secret</b>.</li>
-  <li>Select the <b>Namespace</b> you wish to manage secrets.</li>
-  <li>Enter a <b>Secret Name</b> for your secrets.</li>
-  <li>Now enter the secrets as <b>key=value</b>. You can enter multiples, one per line. Below is an example.</li>
-
-  <img src="images/europak8s-create-new-secrets-europa.png" alt="Create new Secrets">
-
-  <li>When you are ready, click <b>Create Secret</b>.</li>
-</ol>
-
-You have created cluster namespace secrets. These secrets are available during deployment in the <b>env</b> container section of the Kubernetes deployment specification.
+You have created cluster namespace secrets. YOur secrets are available during deployment in the contaner **env** section of the Kubernetes deployment specification.
 
 ~~~
 env:
@@ -74,7 +51,6 @@ env:
         key: EUROPA_DB_ENDPOINT
         name: europa
 ~~~
-
 
 Here is an example deployment specification that leverages the above example secrets.
 
@@ -174,19 +150,17 @@ spec:
       restartPolicy: Always
 ~~~
 
-## Edit Secrets
+## Edit secrets
 
-Follow the procedures above to navigate to the cluster secrets.
-
-Click the <b>edit icon</b> to the right of a secret name to edit it.
-
-<img src="images/europak8s-edit-secrets.png" alt="Edit Secrets">
+1. From your projects page, click **Secrets**.
+1. Select your cluster.
+1. Click **Edit** next to the secret you want to edit.
 
 
-## Delete Secrets
+## Delete secrets
 
-Follow the procedures above to navigate to the cluster secrets.
+1. From your projects page, click **Secrets**.
+1. Select your cluster.
+1. Click **trash can** next to the secret you want to delete.
 
-Click the <b>trash can icon</b> to the right of a secret name to delete it.
-
-<img src="images/europak8s-delete-secrets.png" alt="Delete Secrets">
+**Related topics**: [Access management](./group.html), [set cluster permissions](./cluster-set-permissions.html).

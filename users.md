@@ -5,7 +5,7 @@ title: "Managing users"
 
 You can add other Pipelines users to your account. This allows you to share your account resources with others. This includes your applications, servers, workflows, and more. To add a user to your account, the user must have a Puppet Pipelines account.
 
-## Add a User to your Account
+## Add a user to your account
 
 <ol>
 <li>In the Pipelines web UI, click the <b>gear</b> at the top right.</li>
@@ -35,7 +35,7 @@ You can remove users from your account.
 
 The user is now removed from your account.
 
-## Switching Accounts
+## Switching accounts
 
 You can change your current context to use a different account that you have been made a user of.
 
@@ -64,7 +64,7 @@ You can see the accounts you have access to.
 
 <ol>
 
-<li>Ensure you are viewing your account</a>.</li>
+<li>Ensure you are viewing your account.</li>
 <li>Click your account <b>company name</b> on the top right.</li>
 
 <img src="images/users-click-for-profile.png" alt="view-your-profile">
@@ -74,7 +74,7 @@ You can see the accounts you have access to.
 
 ## Change your account profile
 
-You can set your accounts profile information. This helps users who are members of your account to better differentiate between accounts.
+You can set your account's profile information. This helps users who are members of your account to better differentiate between accounts.
 
 1. Ensure you are viewing your account</a>.
 1. Click your account <b>company name</b> on the top right. This will take you to your profile page. 

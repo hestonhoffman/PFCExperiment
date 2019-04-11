@@ -14,8 +14,6 @@ Webhooks provide a secure mechanism to make an HTTP POST based on a Puppet Pipel
 
 Puppet Pipelines webhooks communicate with a webhook server in your environment. This means any firewall must allow Pipelines to reach your webhook server on port 80 and/or port 443 (or other TCP port you may configure for your webhook) and allow the return response from your webhook server to Puppet Pipelines.
 
-Configuring webhooks is easy.
-
 <img src="images/webhook-example-buildhooks.png" alt="webhooks build">
 
 

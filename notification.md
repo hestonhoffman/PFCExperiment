@@ -1,83 +1,25 @@
 ---
 layout: default
-title: "Kubernetes notifications"
+title: "Set up Slack and email notifications"
 ---
 
-When using Pipelines for Containers to build and deploy to Kubernetes, notifications can be configured. These notifications include:
+You can set up email and Slack notifications for container builds and deployments. 
 
-<ul>
-  <li>When build starts.</li>
-  <li>When build completes.</li>
-  <li>When deploy starts.</li>
-  <li>When deploy completes.</li>
-</ul>
+The following notification options are available:
+* A container build starts
+* A container build completes
+* A deployment starts
+* A deployment completes 
 
-Failed builds or deploys are considered completed and will notify stating the event failed.
+Failed builds or deployments are considered completed and give notifications with an "event failed" status.
 
-Build events are configured in a project.
+Build notifications are specific to each container. You must set up separate notifications for each container that you want to be notified about. You can access build notifications from your project. 
 
-Deploy events are configured in a cluster.
+Deployment notifications are specific to each cluster namespace. You must set up separate notifications for each namespace that you want to be notified about. You can access deployment notifications from your project, or through the **Clusters** page. 
 
-Notifications can be sent/received via 3 methods:
+> **Remember**: Before you set up Slack notifications, make sure you've enabled Slack in Integrations. 
 
-<ul>
-  <li>eMail</li>
-  <li>HipChat</li>
-  <li>Slack</li>
-</ul>
-
-## Build notifications
-
-Pipelines Kubernetes build notifications are configured in a project.
-
-Build notifications are specific to a container.
-
-<h3>Create Build Notification</h3>
-
-To create a build notification, you must first have a project.
-
-<ol>
-  <li>In a project, click the <b>Notifications</b> tab.</li>
-  <li>On the right, select which <b>container build</b> you wish to be notified about.</li>
-
-  <img src="images/k8s-notification-build.png" alt="Build Notifications">
-
-  <li>Select the <b>Type</b> of notification.</li>
-  <li>Select the <b>Medium</b> for notifications.</li>
-
-  <img src="images/k8s-notification-build-types.png" alt="Build Notifications">
-
-  <li>Select the <b>Recepient</b>.</li>
-  <li>Click <b>Add Notification</b>.</li>
-</ol>
-
-## Deploy notifications
-
-Pipelines Kubernetes deploy notifications are configured in a project.
-
-Deploy notifications are specific to a cluster namespace.
-
-<h3>Create Deploy Notification</h3>
-
-To create a deploy notification, you must first have a project and a cluster.
-
-<ol>
-  <li>In a project, click the <b>Notifications</b> tab.</li>
-  <li>On the bottom right, select which <b>cluster</b> you wish to be notified about deployments.</li>
-
-  <img src="images/k8s-notification-deploy.png" alt="Build Notifications">
-
-  <li>Select the <b>namespace</b> to set notifications.</li>
-  <li>Select the <b>Type</b> of notification.</li>
-  <li>Select the <b>Medium</b> for notifications.</li>
-
-  <img src="images/k8s-notification-deploy-types.png" alt="Build Notifications">
-
-  <li>Select the <b>Recepient</b>.</li>
-  <li>Click <b>Add Notification</b>.</li>
-</ol>
-
-
-
-
-
+**Related topics**:
+* For more information about containers, see [Containers](./container.md).
+* For more information about Kubernetes deployments, see [Set up a deployment](./deployment-set-up.md).
+* For more information about integrations, see [Integrations](./integrate.md).

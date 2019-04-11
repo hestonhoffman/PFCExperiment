@@ -41,9 +41,9 @@ To use the distelli.yml for automating authentication with the Pipelines CLI, th
 ~/distelli.yml
 ~~~
 
-To view an example of this, see [Auto Deploy from your CI Platform](../for-apps/deployment-ci.html).
+To view an example of this, see [Auto Deploy from your CI Platform](https://puppet.com/docs/pipelines-for-apps/free/deployment-ci.html).
 
-<h3><a name="specifying-credentials"></a>Specifying Credentials</h3>
+<h3><a name="specifying-credentials"></a>Specifying credentials</h3>
 
 When using the distelli.yml file, the following fields are required:
 
@@ -55,7 +55,7 @@ DistelliSecretKey:
 
 These fields are tied to a Puppet Pipelines account. Ensure you are [using the correct account](./users.html) when retrieving these values.
 
-<h4>Retrieving Credentials</h4>
+<h4>Retrieving credentials</h4>
 
 <ol>
 <li>Click the <b>gear</b> icon from the top right.</li>
@@ -72,7 +72,7 @@ DistelliSecretKey: '1234567890123456789012345678901234567'
 
 With this file in place, when you do a Pipelines agent install, you will not be prompted for manual entry of your email credentials. Instead the agent will use the credentials in the distelli.yml file to connect the server to a Puppet Pipelines account.
 
-<h3><a name="specifying-environment"></a>Specifying Environment</h3>
+<h3><a name="specifying-environment"></a>Specifying environment</h3>
 
 You can specify one or more application environments for this server to join automatically when installing the Pipelines agent and using a distelli.yml. This assumes the environment(s) specified belong to the Puppet Pipelines account associated with the agent access token and secret key.
 
@@ -96,7 +96,7 @@ Here is a full example. Access token and secret key are required.
 
 
 > **Important:** If the environment setting "Auto Deploy the Active Release when a new Server joins this environment" is enabled (checked) and there is an active release, an auto deploy will occur when servers join an environment using distelli.yml.
-    For more info, see [Environment Settings](../for-apps/environment.html).
+    For more info, see [Environment Settings](https://puppet.com/docs/pipelines-for-apps/free/environment.html).
 
 <h3><a name="distelliaccesstoken"></a>DistelliAccessToken</h3>
 
@@ -134,7 +134,7 @@ distelli login -conf ~/distelli.yml
 ~~~
 
 
-<h3><a name="login-the-distelli-agent"></a>Log into the Pipelines Agent</h3>
+<h3><a name="login-the-distelli-agent"></a>Log into the Pipelines agent</h3>
 
 To use the distelli.yml for authenticating the Pipelines agent, use this syntax:
 

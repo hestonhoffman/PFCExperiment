@@ -3,27 +3,25 @@ layout: default
 title: "Agent commands"
 ---
 
-**intro text goes here**
-
-## <h3><a name="agent-dump"></a>/usr/local/bin/distelli agent dump</h3>
+## /usr/local/bin/distelli agent dump
 
 Prints the agent processes, deployed applications, and current deployments.
 
-<h2>SYNTAX</h2>
+<h4>SYNTAX</h4>
 
 ~~~
 /usr/local/bin/distelli agent dump
 ~~~
 
-<h2>OPTIONS</h2>
+<h4>OPTIONS</h4>
 
 none
 
-<h2>USAGE</h2>
+<h4>USAGE</h4>
 
-This command is typically used for troubleshooting or to quickly see what applications are deployed and running on the server.
+This command is typically used for troubleshooting or to see what applications are deployed and running on the server.
 
-<h2>EXAMPLES</h2>
+<h4>EXAMPLES</h4>
 
 ~~~
 /usr/local/bin/distelli agent dump
@@ -38,25 +36,25 @@ a-c987654321d987654321
 -1/10/900/900/900
 ~~~
 
-## <h3><a name="agent-help"></a>/usr/local/bin/distelli agent help</h3>
+## /usr/local/bin/distelli agent help
 
 Prints the agent commands and brief help message for each.
 
-<h2>SYNTAX</h2>
+<h4>SYNTAX</h4>
 
 ~~~
 /usr/local/bin/distelli agent help
 ~~~
 
-<h2>OPTIONS</h2>
+<h4>OPTIONS</h4>
 
 None.
 
-<h2>USAGE</h2>
+<h4>USAGE</h4>
 
 Use to get help.
 
-<h2>EXAMPLE</h2>
+<h4>EXAMPLE</h4>
 
 ~~~
 /usr/local/bin/distelli agent help
@@ -68,7 +66,7 @@ Connect your server to Pipelines
 Undocumented, defaults to /distelli
 
 stop
-Stops all processes being supervised, and stops the supervisor, use with CAUTION since all applications deployed (and the agent) will be stopped
+Stops all processes being supervised, and stops the supervisor, use with CAUTION because all applications deployed (and the agent) will be stopped
 
 version
 Display the version of the agent
@@ -80,7 +78,7 @@ uninstall
 Uninstall the Pipelines agent permanently.
 
 run
-Run the Pipelines agent in the foreground, printing log files to STDERR. This command should only be ran as a child of `dtk supervise`.
+Run the Pipelines agent in the foreground, printing log files to STDERR. This command should be run only as a child of `dtk supervise`.
 
 install
 Install and possibly start (or restart) the agent.
@@ -98,18 +96,18 @@ supervise
 Undocumented
 ~~~
 
-## <h3><a name="agent-install"></a>/usr/local/bin/distelli agent install</h3>
+## /usr/local/bin/distelli agent install
 
 Install and possibly start (or restart) the agent.
 
-<h2>SYNTAX</h2>
+<h4>SYNTAX</h4>
 
 ~~~
 /usr/local/bin/distelli agent install [-nostart] [-onboot] [-conf FILE]
 ~~~
 
 
-<h2>OPTIONS</h2>
+<h4>OPTIONS</h4>
 
 ~~~
 -nostart
@@ -130,16 +128,16 @@ This will install the agent, but not start it. The agent will automatically star
 
 This option tells the agent to read a distelli.yml for the agent access token and secret key. See [distelli.yml usage](./distelliyml.html) for more information.
 
-<h2>USAGE</h2>
+<h4>USAGE</h4>
 
 
 The `/usr/local/bin/distelli agent install` command can be used to change the agent behavior. Using this command you can specify install options, as noted above.
 If you issue this command on a server that has running deployed software, it will continue to run. If you specify the -nostart option, the applications will not continue to run after a boot of the server. Doing a `/usr/local/bin/distelli agent install` or `/usr/local/bin/distelli agent start` will (re)start the deployed applications.
 
-> **Caution:** The above comments assume the application running was started with the [Exec section of the distelli-manifest.yml](../for-apps/manifest.html).
+> **Caution:** The above comments assume the application running was started with the [Exec section of the distelli-manifest.yml](./manifest.html).
 
 
-<h2>EXAMPLES</h2>
+<h4>EXAMPLES</h4>
 
 Reinstall the agent and tell it not to start until next boot.
 
@@ -147,19 +145,19 @@ Reinstall the agent and tell it not to start until next boot.
 /usr/local/bin/distelli agent install -onboot
 ~~~
 
-## <h3><a name="agent-loglevel"></a>/usr/local/bin/distelli agent loglevel</h3>
+## /usr/local/bin/distelli agent loglevel
 
 Set the agent logging level. Logging is done to /distelli/logs/agent.log. The default is **info**.
 
-> **Caution:** This command is typically used only under the guidance of Puppet Pipelines support.
+> **Caution:** This command is typically used under the guidance of Puppet Pipelines support.
 
-<h2>SYNTAX</h2>
+<h4>SYNTAX</h4>
 
 ~~~
 /usr/local/bin/distelli agent loglevel debug|error|info|warn
 ~~~
 
-<h2>OPTIONS</h2>
+<h4>OPTIONS</h4>
 
 
 ~~~
@@ -186,11 +184,11 @@ warn
 
 Sets the logging level to warn. Only potentially harmful situations will be logged.
 
-<h2>USAGE</h2>
+<h4>USAGE</h4>
 
-This command will typically only be used when requested by Puppet Pipelines support.
+This command is typically used only when requested by Puppet Pipelines support.
 
-<h2>EXAMPLES</h2>
+<h4>EXAMPLES</h4>
 
 Set the logging level to **error**.
 
@@ -198,49 +196,49 @@ Set the logging level to **error**.
 /usr/local/bin/distelli agent loglevel error
 ~~~
 
-## <h3><a name="agent-run"></a>/usr/local/bin/distelli agent run</h3>
+## /usr/local/bin/distelli agent run
 
 This is an internal command used to run the agent.
 
 > **Caution:** This command is typically used only under the guidance of Puppet Pipelines support.
 
-<h2>SYNTAX</h2>
+<h4>SYNTAX</h4>
 
 ~~~
 /usr/local/bin/distelli agent run
 ~~~
 
-<h2>OPTIONS</h2>
+<h4>OPTIONS</h4>
 
 None.
 
-<h2>USAGE</h2>
+<h4>USAGE</h4>
 
 This command is used by internal mechanisms to run the agent.
 
-<h2>EXAMPLES</h2>
+<h4>EXAMPLES</h4>
 
 None.
 
-## <h3><a name="agent-start"></a>/usr/local/bin/distelli agent start</h3>
+## /usr/local/bin/distelli agent start
 
 This will start the agent. if the agent is already running, this will restart the agent.
 
-<h2>SYNTAX</h2>
+<h4>SYNTAX</h4>
 
 ~~~
 /usr/local/bin/distelli agent start
 ~~~
 
-<h2>OPTIONS</h2>
+<h4>OPTIONS</h4>
 
 None.
 
-<h2>USAGE</h2>
+<h4>USAGE</h4>
 
 Used to start the agent. If the agent was installed with the `-nostart` option, this command `/usr/local/bin/distelli agent start` will start the agent.
 
-<h2>EXAMPLES</h2>
+<h4>EXAMPLES</h4>
 
 Starting the agent.
 
@@ -250,25 +248,25 @@ Running under 'jdoe' account
 Starting upstart daemon with name:\tdtk-supervise-cc123345677ad94a8d34ac610381242f9ae28bb8
 ~~~
 
-## <h3><a name="agent-status"></a>/usr/local/bin/distelli agent status</h3>
+## /usr/local/bin/distelli agent status
 
 Shows the current status of the agent.
 
-<h2>SYNTAX</h2>
+<h4>SYNTAX</h4>
 
 ~~~
 /usr/local/bin/distelli agent status
 ~~~
 
-<h2>OPTIONS</h2>
+<h4>OPTIONS</h4>
 
 None.
 
-<h2>USAGE</h2>
+<h4>USAGE</h4>
 
 Use this command to check the status of the agent. This is useful when confirming that the agent was properly installed.
 
-<h2>EXAMPLES</h2>
+<h4>EXAMPLES</h4>
 
 Look at the status of a running agent.
 
@@ -284,25 +282,25 @@ Look at the status of a stopped agent.
 Distelli Agent is Stopped
 ~~~
 
-## <h3><a name="agent-stop"></a>/usr/local/bin/distelli agent stop</h3>
+## /usr/local/bin/distelli agent stop
 
 Stops the running agent.
 
-<h2>SYNTAX</h2>
+<h4>SYNTAX</h4>
 
 ~~~
 /usr/local/bin/distelli agent stop
 ~~~
 
-<h2>OPTIONS</h2>
+<h4>OPTIONS</h4>
 
 None.
 
-<h2>USAGE</h2>
+<h4>USAGE</h4>
 
 Use this to stop the agent running in the background.
 
-<h2>EXAMPLES</h2>
+<h4>EXAMPLES</h4>
 
 Stop the agent.
 
@@ -310,17 +308,17 @@ Stop the agent.
 /usr/local/bin/distelli agent stop
 ~~~
 
-## <h3><a name="agent-uninstall"></a>/usr/local/bin/distelli agent uninstall</h3>
+## /usr/local/bin/distelli agent uninstall
 
 Use this to uninstall the agent.
 
-<h2>SYNTAX</h2>
+<h4>SYNTAX</h4>
 
 ~~~
 /usr/local/bin/distelli agent uninstall
 ~~~
 
-<h2>OPTIONS</h2>
+<h4>OPTIONS</h4>
 
 ~~~
 --yes
@@ -328,7 +326,7 @@ Use this to uninstall the agent.
 
 The `--yes` option facilitates a quiet deletion and auto-answers `yes` to the **Continue? (yes/no)** prompt.
 
-<h2>USAGE</h2>
+<h4>USAGE</h4>
 
 Uninstalling the agent will cause the agent to stop running and for the agent to destroy its Unique ID (UID).
 <ul>
@@ -344,7 +342,7 @@ Uninstalling the agent will cause the agent to stop running and for the agent to
 
 Uninstalling the agent doesn't remove the agent files, which allows for a future [/usr/local/bin/distelli agent install](./agent.html).
 
-<h2>EXAMPLES</h2>
+<h4>EXAMPLES</h4>
 
 
 ~~~
@@ -359,25 +357,25 @@ yes
 #
 ~~~
 
-## <h3><a name="agent-version"></a>/usr/local/bin/distelli agent version</h3>
+## /usr/local/bin/distelli agent version
 
 Shows the current version of the installed agent.
 
-<h2>SYNTAX</h2>
+<h4>SYNTAX</h4>
 
 ~~~
 /usr/local/bin/distelli agent version
 ~~~
 
-<h2>OPTIONS</h2>
+<h4>OPTIONS</h4>
 
 None.
 
-<h2>USAGE</h2>
+<h4>USAGE</h4>
 
 Show the version of the Pipelines agent.
 
-<h2>EXAMPLES</h2>
+<h4>EXAMPLES</h4>
 
 ~~~
 /usr/local/bin/distelli agent version

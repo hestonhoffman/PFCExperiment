@@ -3,126 +3,251 @@ layout: default
 title: "Example group permission roles"
 ---
 
-With Puppet Pipelines teams and groups you can define permissions for team members. This document will layout the permissions required for example roles.
+Here are permission settings for four example user roles.  
 
-<h3><a name="groups"></a>Groups</h3>
+Give users permissions by adding them to a user group. For more information, see [Groups](./group.html) and [Users](./users.html). 
 
-Permissions are defined in groups. Users are assigned to groups. For more information see:
+Here are the four example roles:
+* **Read-only**: A user who has read-only access to team activities, including; builds, releases, and deploys.
+* **Deploy and build any application**: A user who can create, build, and deploy any team application.
+* **Deploy and build a single application**: A user who can build and deploy a specific application.
+* **Manager**: A user who manages the team account.
 
-* [Group and group permissions documentation](./group.html)
-* [Users documentation](./users.html)
+<table>
+  <tr>
+    <th>Group</th>
+    <th>Application</th>
+    <th>Environment</th>
+    <th>Agent</th>
+    <th>Settings</th>
+    <th>Billing</th>
+    <th>Credentials</th>
+    <th>Teams</th>
+    <th>Groups</th>
+  </tr>
+  <tr>
+   <td><b>Read Only</b></td>
+   <td>Read Only</td>
+   <td>Read Only</td>
+   <td>Full Control</td>
+   <td>Read Only</td>
+   <td>Read Only</td>
+   <td>Read Only</td>
+   <td>Read Only</td>
+   <td>Read Only</td>
+  </tr>
+  <tr>
+   <td><b>Deploy and build any application</b></td>
+   <td>Deploy Only</td>
+   <td>Deploy Only</td>
+   <td>Full Control</td>
+   <td>Read Only</td>
+   <td>No Access</td>
+   <td>No Access</td>
+   <td>No Access</td>
+   <td>No Access</td>
+  </tr>
+  <tr>
+   <td><b>Deploy and build a single application</b></td>
+   <td>No Access,<br/>1 overwrite</td>
+   <td>Deploy Only</td>
+   <td>Full Control</td>
+   <td>No Access</td>
+   <td>No Access</td>
+   <td>No Access</td>
+   <td>No Access</td>
+   <td>No Access</td>
+  </tr>
+  <tr>
+   <td><b>Manager</b></td>
+   <td>Read Only</td>
+   <td>Read Only</td>
+   <td>No Access</td>
+   <td>Read Only</td>
+   <td>Read Only</td>
+   <td>Read Only</td>
+   <td>Read Only</td>
+   <td>Read Only</td>
+  </tr>
+</table>
 
-To create group permissions you will need to do the following:
+## Read only
 
-1. Create a group. 
-1. Assign permissions to the group. 
-1. Assign users to the group. 
+Use the following settings:
 
-<h3><a name="roles"></a>Roles</h3>
+<table>
+ <tr>
+     <th>Group</th>
+     <th>Application</th>
+     <th>Environment</th>
+     <th>Agent</th>
+     <th>Settings</th>
+     <th>Billing</th>
+     <th>Credentials</th>
+     <th>Teams</th>
+     <th>Groups</th>
+ </tr>
+ <tr>
+     <td><b>Read Only</b></td>
+     <td>Read Only</td>
+     <td>Read Only</td>
+     <td>Full Control</td>
+     <td>Read Only</td>
+     <td>Read Only</td>
+     <td>Read Only</td>
+     <td>Read Only</td>
+     <td>Read Only</td>
+ </tr>
+</table>
 
-The following are four example roles.
+These permissions allow a user to view most details for the team. They are not able to deploy or make changes.
 
-**Read-Only** providing read-only access to team activities, including; builds, releases, and deploys.
+A user assigned these permissions can view all:
+* Applications
+* Application environments
+* Servers
+* Builds
+* Releases
+* Deployments
 
-**Deploy and Build any Application** providing the ability to create, build, and deploy any team application.
+They cannot view: 
+* Application settings
+* Environment settings
+* Team global settings
 
-**Deploy and Build a Single Application** providing the ability to build and deploy an application.
 
-**Manager** providing the ability to manage the team account.
+## Deploy and build any application
 
-<img src="images/perm-all-groups.png" alt="All Groups">
+Use the following settings:
 
-<h3><a name="read-only"></a>Read Only</h3>
+<table>
+ <tr>
+     <th>Group</th>
+     <th>Application</th>
+     <th>Environment</th>
+     <th>Agent</th>
+     <th>Settings</th>
+     <th>Billing</th>
+     <th>Credentials</th>
+     <th>Teams</th>
+     <th>Groups</th>
+ </tr>
+ <tr>
+     <td><b>Deploy Applications</b></td>
+     <td>Deploy Only</td>
+     <td>Deploy Only</td>
+     <td>Full Control</td>
+     <td>Read Only</td>
+     <td>No Access</td>
+     <td>No Access</td>
+     <td>No Access</td>
+     <td>No Access</td>
+ </tr>
+</table>
 
-<img src="images/perm-read-only.png" alt="Read-Only Permissions">
+These permissions allow a user to build and deploy all applications in the team.
 
-These permissions will allow a user to view most details for the team. They will not be able to deploy or make changes.
+A user assigned these permissions can:
+* Build and deploy any application
+* Deploy to any application environments
+* Manage servers
+* View all builds
+* View all releases
+* View all deployments
 
-A user assigned these permissions can/cannot:
+They cannot:
+* View application settings
+* View environment settings
+* View team global settings
 
-<ul>
-<li>View all applications</li>
-<li>View all application environments</li>
-<li>View all servers</li>
-<li>View all builds</li>
-<li>View all releases</li>
-<li>View all deployments</li>
-<li>Cannot view application settings</li>
-<li>Cannot view environment settings</li>
-<li>Cannot view team global settings</li>
-</ul>
+## Deploy and build a single application
 
-<h3><a name="deploy-and-build-any-application"></a>Deploy and Build any Application</h3>
+Use the following settings:
 
-<img src="images/perm-all-apps.png" alt="All Apps Permissions">
+<table>
+ <tr>
+     <th>Group</th>
+     <th>Application</th>
+     <th>Environment</th>
+     <th>Agent</th>
+     <th>Settings</th>
+     <th>Billing</th>
+     <th>Credentials</th>
+     <th>Teams</th>
+     <th>Groups</th>
+ </tr>
+ <tr>
+     <td><b>Deploy Single App</b></td>
+     <td>No Access, <br/>1 overwrite</td>
+     <td>Deploy Only</td>
+     <td>Full Control</td>
+     <td>No Access</td>
+     <td>No Access</td>
+     <td>No Access</td>
+     <td>No Access</td>
+     <td>No Access</td>
+ </tr>
+</table>
 
-These permissions will allow a user to build and deploy all applications in the team.
+These permissions allow a user to build and deploy on a specific application. In this example, **Applications** is set to **No Access** and a **Full Access** override is granted to one application. Note that you can grant full access to more than one application.
 
-A user assigned these permissions can/cannot:
+A user assigned these permissions can:
+* Build and deploy a specific application
+* Deploy to the specific application environments
+* Manage servers
+* View all releases
+* View all deployments
 
-<ul>
-<li>Build and deploy any application</li>
-<li>Deploy to any application environments</li>
-<li>Manage servers</li>
-<li>View all builds</li>
-<li>View all releases</li>
-<li>View all deployments</li>
-<li>Cannot view application settings</li>
-<li>Cannot view environment settings</li>
-<li>Cannot view team global settings</li>
-</ul>
+They cannot:
+* View application settings
+* View environment settings
+* View team global settings
 
-<h3><a name="deploy-and-build-a-single-application"></a>Deploy and Build a Single Application</h3>
+## Manager
 
-<img src="images/perm-one-app.png" alt="Permissions One App">
+Use the following settings:
+<table>
+ <tr>
+     <th>Group</th>
+     <th>Application</th>
+     <th>Environment</th>
+     <th>Agent</th>
+     <th>Settings</th>
+     <th>Billing</th>
+     <th>Credentials</th>
+     <th>Teams</th>
+     <th>Groups</th>
+ </tr>
+ <tr>
+     <td><b>Manager</b></td>
+     <td>Read Only</td>
+     <td>Read only</td>
+     <td>No Access</td>
+     <td>Full Control</td>
+     <td>Full Control</td>
+     <td>No Access</td>
+     <td>Full Control</td>
+     <td>Full Control</td>
+ </tr>
+</table>
 
-These permissions will allow a user to build and deploy on a specific application. In this example Applications access is set to No Access and Full Access is granted to one application. Note, you can grant full access to more than one application.
+A user assigned these permissions can:
+* View all applications
+* View all application environments
+* View all servers
+* View all builds
+* View all releases
+* View all deployments
+* View team global settings
+* Edit the billing plan
+* Edit groups
+* Edit teams
+* Edit integrations
 
-<img src="images/perm-one-app-dialog.png" alt="Permissions One App Dialog">
-
-A user assigned these permissions can/cannot:
-
-<ul>
-<li>Build and deploy a specific application</li>
-<li>Deploy to the specific application environments</li>
-<li>Manage servers</li>
-<li>View all releases</li>
-<li>View all deployments</li>
-<li>Cannot view application settings</li>
-<li>Cannot view environment settings</li>
-<li>Cannot view team global settings</li>
-</ul>
-
-<h3><a name="manager"></a>Manager</h3>
-
-<img src="images/perm-manager.png" alt="Permissions Manager">
-
-A user assigned these permissions can/cannot:
-
-<ul>
-<li>View all applications</li>
-<li>View all application environments</li>
-<li>View all servers</li>
-<li>View all builds</li>
-<li>View all releases</li>
-<li>View all deployments</li>
-<li>View team global setting</li>
-<li>Edit Billing Plan</li>
-<li>Edit Groups</li>
-<li>Edit Team</li>
-<li>Edit Integrations</li>
-<li>Cannot view application settings</li>
-<li>Cannot view environment settings</li>
-<li>Cannot view credentials</li>
-</ul>
-
-<h3><a name="notes"></a>Notes</h3>
-
-To allow a user access to <b>Application Settings</b> they must have Full Control for Applications.
-
-To allow a user access to <b>Environment Settings</b> they must have Full Control for Environments.
-
-To allow a user the ability to <b>Delete Servers</b> they must have Full Control to Agent.
+They cannot:
+* View application settings
+* View environment settings
+* View credentials
 
 
 

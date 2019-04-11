@@ -53,9 +53,9 @@ As you can see above, there are 3 containers in this deployment that all use the
 
 For Pipelines to accurately update this spec and dynamically update the image tag, you must alias (map) the deployment containers to the image (Pipelines container).
 
-<h3>How to Alias a Container</h3>
+<h3>How to alias a container</h3>
 
-First, you must add a container to a project in Pipelines. For more information on creating a project, please see <a href="./project.html">Create Project</a>.
+First, add a container to a project in Pipelines. For more information on creating a project, please see <a href="./project.html">Create Project</a>.
 
 <ol>
   <li>In your project, click the <b>Add Container</b> link.</li>

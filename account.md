@@ -7,8 +7,6 @@ A Puppet Pipelines account gives you access to the Puppet Pipelines platform, we
 
 ## Creating an account
 
-Signing up for a Puppet Pipelines account is easy.
-
 1. Navigate to the [Puppet Pipelines sign-up page](https://pipelines.puppet.com/signup).
 1. Fill in your name, company name (optional), and email address. 
    > **Note:** If you are creating a shared organization account, ensure you are using an email adress that is accessible to the people in your organization. 
@@ -18,29 +16,31 @@ Signing up for a Puppet Pipelines account is easy.
 
 ## Signing in
 
-Once you have created an account, you can sign in at anytime via the Pipelines web UI.
+After you create an account, sign in at any time via the Pipelines web UI.
 
 1. Point your browser at [pipelines.puppet.com](pipelines.puppet.com).
 1. Enter the email and password you used to set up your account. 
 1. Click **Sign In**.
+
+> **Important:** If you enter your password incorrectly too many times, a **THROTTLED** message will appear on the sign-in screen, and your account will be locked as a security precaution. The lock expires in two hours.
 
 ## Editing your profile
 
 1. Sign in to the Pipelines web UI at [pipelines.puppet.com](pipelines.puppet.com).
 1. Click the word <b>Owner</b> in the top right. If you are currently in a team view, click the team name. 
 
-This will take you to your Profile page, where you can change your full name and company name, and verify your email address. 
+This takes you to your **Profile** page, where you can change your full name and company name, and verify your email address. 
 
 ## Finding your username
 
-Many interactions with Puppet Pipelines require your Pipelines username.
+Many interactions with Puppet Pipelines requiyour Pipelines username.
 
 1. Sign in to the Pipelines web UI at [pipelines.puppet.com](pipelines.puppet.com).
 1. On the top right, hover your mouse over your name.
 
-<img src="images/web UI_hover_username.png" alt="Username">
+<img src="images/webui_hover_username.png" alt="Username">
 
-You can find your Pipelines username at the top of the list on the right between the paranthesis. In this scenario, the current user's username is <b>jdoe</b>.
+You can find your Pipelines username at the top of the list on the right between the parentheses. In this scenario, the current user's username is <b>jdoe</b>.
 
 ## Changing or recovering your password
 
@@ -66,7 +66,7 @@ Pipelines profiles can be configured to use your Gravatar Avatar.
 
 To navigate to account settings, click on the gear icon in the upper right corner of the Pipelines web UI. 
 
-Here you will find information about:
+Here you can find information about:
 
 **API tokens:** This is where you create, activate, deactivate, and delete API tokens. For usage, see the Pipelines API documentation. 
 
