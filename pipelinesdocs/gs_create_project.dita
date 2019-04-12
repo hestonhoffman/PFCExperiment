@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="create-project">
+    <title>Create a project and add containers</title>
+    <shortdesc>You’ve created your containers and you’re almost ready to build and deploy them. First, you need to set up a Pipelines project and add your containers to it.</shortdesc>
+    <prolog>
+        <data name="author" value="Heston Hoffman"/>
+    </prolog>
+    <taskbody>
+        <context>
+            Create a Pipelines project.
+        </context>
+        <steps>
+            <step>
+                <cmd>Log into your Pipelines account.</cmd>
+            </step>
+            <step>
+                <cmd>Select <b>Pipelines for containers</b> from the Pipelines drop-down menu.</cmd>
+            </step>
+            <step>
+                <cmd>Click <b>New Project</b>. Enter a project name and a brief description.</cmd>
+            </step>
+            <step>
+                <cmd>Click <b>Create Project</b>.</cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task>

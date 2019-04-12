@@ -5,4 +5,5 @@
   <navtitle>A lwDITA experiment</navtitle>
 </topicmeta>
   <topicref href="gs_build_containers.md" format="mdita"/>
+  <topicref href="gs_create_project.dita" format="dita" />
 </map>
