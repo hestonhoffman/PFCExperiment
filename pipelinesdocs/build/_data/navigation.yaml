@@ -1,0 +1,8 @@
+- name: Home
+  link: /
+- name: About
+  link: /about.html
+- name: How to build containers 
+  link: /gs_build_containers.html
+- name: Blog
+  link: /blog.html  

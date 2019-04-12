@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD LIGHTWEIGHT DITA Map//EN" "lw-map.dtd">
+<map id="testmap">
+<topicmeta>
+  <navtitle>A lwDITA experiment</navtitle>
+</topicmeta>
+  <topicref href="gs_build_containers.md" format="mdita"/>
+</map>

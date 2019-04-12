@@ -1,0 +1,16 @@
+plugins {
+    id 'com.github.eerohele.dita-ot-gradle' version '0.5.0'
+}
+
+defaultTasks 'dita'
+
+// Replace this with the path to your DITA-OT installation.
+ditaOt.dir './dita-ot/3.3.1/libexec/'
+
+dita {
+    // Replace this with the path to the DITA file you want to publish.
+    input 'my.ditamap'
+
+    // Replace this with the format(s) you want to publish into.
+    transtype 'html5'
+}
