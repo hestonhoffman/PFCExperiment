@@ -1,0 +1,13 @@
+# Default TOC sidebar. The sidebar code loops through sections here and provides the appropriate formatting.
+
+entries:
+- title: Sidebar
+  levels: one
+  folders:
+  
+  - title: Pipelines
+    output: web
+    folderitems:
+    - title: 
+      url: /news.html
+      output: web

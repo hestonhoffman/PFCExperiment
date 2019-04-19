@@ -1,10 +1,7 @@
-- name: Home
-  link: /
-- name: About
-  link: /about.html
-- name: How to build containers 
+docs_nav_title: Pipelines Documentation
+docs:
+
+- name: How to build containers
   link: /gs_build_containers.html
-- name: Blog
-  link: /blog.html  
 - name: Create a project
-  link: /gs_create_Project.html  
+  link: /gs_create_Project.html
