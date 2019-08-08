@@ -2,6 +2,7 @@
 layout: default
 title: "Deploy your WordPress and MySQL containers"
 --- 
+# Deploy your WordPress and MySQL containers
 
 In previous steps, you provisioned a cluster, created and built MySQL and WordPress containers, and created a service to ensure that your containers are able to communicate within your cluster. Next, you’ll deploy your containers to all three of the namespaces that you created on your cluster.
 
@@ -52,25 +53,3 @@ First, deploy your containers to the wordpress-dev namespace. After you've creat
       * **Type of Variable**: value
       * **Value**: Use the same password that you set for WORDPRESS_DB_PASSWORD above.
    1. Click **Save Variable**.
-
-      > **Tip**: Clicking **YAML** gives you a YAML configuration generated from the deployment options you've selected. This is a good way to save deployments for reference, or for future use in other projects. 
-   
-   1. Click **Deploy** and a notification appears. To see the progress and details of your deployment, click **Click here**. 
-   
-## Deploy to wordpress-stage and wordpress-prod
-
-Now that you've created your first deployment, you can use it as a template for your deployments to the wordpress-stage, and wordpress-prod namespaces. 
-1. Deploy to the wordpress-stage namespace.
-   1. From your Pipelines project, click **Deploy** <img src="images/redeploy.png" alt="Deploy"/> next to your wordpress-dev deployment. 
-   1. Change the **Namespace** from **wordpress-dev** to **wordpress-stage**. 
-   1. Enter a short deployment description. 
-      > **Remember**: You don't need to change any other values. You want this deployment to exactly match your wordpress-dev deployment.
-   1. Click **Deploy**.
-1. Deploy to the wordpress-prod namespace.
-   1. From your Pipelines project, click **Deploy** <img src="images/redeploy.png" alt="Deploy"/>next to your wordpress-dev deployment. 
-   1. Change the **Namespace** from **wordpress-dev** to **wordpress-prod**. 
-   1. Enter a short deployment description.
-   1. Click **Deploy**.
-
-Your containers are deployed. You now have a working WordPress blog hosted on Kubernetes, Next, [automate your builds and deployments in a pipeline](./gs_pipeline_set_up.md).
-
