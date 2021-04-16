@@ -85,3 +85,5 @@ Here you can find information about:
    * Notification system (Slack and HipChat)
 
 **Billing:** Puppet Pipelines offers several billing plans, including a free plan. When you are ready to upgrade you can do so from the this screen.
+
+test
